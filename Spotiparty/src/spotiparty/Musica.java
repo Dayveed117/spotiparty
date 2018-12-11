@@ -23,7 +23,7 @@ public class Musica {
     public Musica(double duracao, double rating, String titulo, String autor, String album, String genero) {
        
         this.duracao = duracao;
-        this.rating = rating;
+        this.rating = rating;              //tem que ser um double de 0 a 5 especificado no main
         this.titulo = titulo;
         this.autor = autor;
         this.album = album;
