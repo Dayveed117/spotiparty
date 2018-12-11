@@ -9,11 +9,11 @@ package SpotiParty;
  *
  * @author Utilizador
  */
-public class AdminUser extends User{
+public class AdminUser extends UserNormal{
 
     public boolean is_Admin;
     
-    public AdminUser(User u, boolean Admin) {
+    public AdminUser(UserNormal u, boolean Admin) {
         super(u);
         is_Admin = true;
     }

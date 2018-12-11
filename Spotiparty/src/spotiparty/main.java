@@ -15,6 +15,17 @@ import javax.swing.JOptionPane;
 
 public class main{
     
+    public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
+        boolean encontrou = false;
+        for(int i = 0;i < lista.size() ; i++){
+            if(lista.get(i).getNome() == nome){
+                encontrou = true;
+            }
+        }
+        
+        return encontrou;
+    }
+    
     public static void main(String[] args) {
         
        //Arrays 
@@ -196,6 +207,12 @@ public class main{
            
            //Adicionar Amigo
            if(amigos_escolha == 1){
+              String a =  JOptionPane.showInputDialog(null,"Que amigo pretende adicionar ? ");
+               if(is_in_list(a,users)){
+                   
+                       
+                   }
+               }
               
               current_user.addFriend();
            }

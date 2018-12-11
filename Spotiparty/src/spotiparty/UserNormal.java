@@ -26,6 +26,14 @@ public class UserNormal extends User{
         Idade = num;
     }
     
+    public UserNormal(UserNormal u){
+        this.Idade = u.getIdade();
+        this.Nickname = u.getNick();
+        this.Password = u.getPW();
+        this.amigos = u.getAmigos();
+    }
+    
+    
     public String getNick(){
         return Nickname;
     }
@@ -84,6 +92,11 @@ public class UserNormal extends User{
         return s;
     }
        
+      
+    public ArrayList<UserNormal> getAmigos(){
+        return amigos;
+        
+    }
     
          
     
