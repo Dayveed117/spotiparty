@@ -21,4 +21,9 @@ public class Sala {
     play music
     votação a escolher musica
     */
+    
+    /*o tóze gosta de piça
+    e o birto é um cócó
+    */
+    
 }
