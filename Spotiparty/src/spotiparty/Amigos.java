@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projeto;
+package Spotiparty;
 import java.util.*;
 import javax.swing.JOptionPane;
 /**
