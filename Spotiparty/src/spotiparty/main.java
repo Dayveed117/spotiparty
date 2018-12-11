@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+package SpotiParty;
 import java.io.*;
 import java.util.*;
 import static javafx.application.Platform.exit;
@@ -17,7 +18,7 @@ public class main{
     public static void main(String[] args) {
         
        //Arrays 
-       ArrayList<User> users = new ArrayList<User>(20);
+       ArrayList<UserNormal> users = new ArrayList<UserNormal>(20);
        ArrayList<Sala> salas = new ArrayList<Sala>(5);
        ArrayList<Musica> playlist = new ArrayList<Musica>();
 
@@ -56,7 +57,6 @@ public class main{
        
        // Registar um novo user
        if (escolha == 1 ){
-           
            String nome = JOptionPane.showInputDialog(null,"Insira o seu nome \n ");
            String nick = JOptionPane.showInputDialog(null,"Insira o seu nickname \n ");
            String num = JOptionPane.showInputDialog(null,"Insira a sua idade \n ");
@@ -64,7 +64,7 @@ public class main{
            String password = JOptionPane.showInputDialog(null,"Insira a sua password \n");
            
            
-           User novo = new User(nome,idade,nick,password);
+           UserNormal novo = new UserNormal(nome,nick,password,idade);
            users.add(novo);
            current_user = novo.clone();
 
@@ -77,20 +77,19 @@ public class main{
        
        //Log in
        if(escolha == 2){
-           int dados_corretos = 0;
+           boolean dados_corretos = false;
 
-
-           while(dados_corretos = 0){
+           while(dados_corretos == false){
              String nickname = JOptionPane.showInputDialog(null,"Insira o seu nickname ");
              String password = JOptionPane.showInputDialog(null,"Insira a password "); // TODO -> meter a pssword com asteriscos 
              
              
              //Verirficar se os dados estão corretos com os users registadors 
               for(int i = 0 ;  i < users.size() ; i++){
-                if(nickname == users.get(i).getNickname){
-                  if(password == users.get(i).getPassword){
-                    dados_corretos = 1;
-                    current_user = users.get(i).clone()
+                if(nickname == users.get(i).getNick()){ 
+                  if(password == users.get(i).getPW()){
+                    dados_corretos = true;
+                    current_user = users.get(i).clone();
                   }
                   else{
                     break;
@@ -98,8 +97,8 @@ public class main{
                 }
               }
 
-              if(dados_corretos){
-                JOptionPane.showMessageDialog(null,"Dados incorretos , tente outra vez.")
+              if(dados_corretos == false ){
+                JOptionPane.showMessageDialog(null,"Dados incorretos , tente outra vez.");
               }
              }
           
@@ -110,9 +109,7 @@ public class main{
        if(escolha == 3 ){
             guest = true;
            //Cria um guest
-            User g = new User("guest",0,"","");
-
-
+            User g = new User("guest");
        }
       }
        
@@ -176,7 +173,7 @@ public class main{
 
 
                //TODO -> Melhorar a dinamicidade da coisa
-               JOptionPane.showInputDialog(null,"Membros :           Chat :         ")
+               JOptionPane.showInputDialog(null,"Membros :           Chat :         ");
 
 
           }
@@ -199,13 +196,14 @@ public class main{
            
            //Adicionar Amigo
            if(amigos_escolha == 1){
+              
               current_user.addFriend();
            }
            
 
            //Remover Amigo
            if(amigos_escolha == 2){
-            current_user.removerAmigo();
+            current_user.removeAmigo();
                
            }
            
@@ -213,7 +211,7 @@ public class main{
            //Listar os amigos
            if(amigos_escolha == 3){
             JOptionPane.showMessageDialog( null,"Your friends : \n"
-              + current_user.listar_amigos())
+              + current_user.listaramigos());
              }
        }
        

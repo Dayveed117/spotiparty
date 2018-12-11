@@ -3,22 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package SpotiParty;
 import java.util.*;
-/**
- *
- * @author Utilizador
- */
+
+
 public class User {
     
+
+    
+    public String nome;
+    ArrayList<Amigos> amigos = new ArrayList<Amigos>();
+
     public User(User u){
         this.nome = u.getNome();
     }
     
     
-    public String nome;
-    ArrayList<Amigos> amigos = new ArrayList<Amigos>();
-    
+    public User(){
+        nome = "";
+    }
     
     public User(String n){
         nome = n;       
