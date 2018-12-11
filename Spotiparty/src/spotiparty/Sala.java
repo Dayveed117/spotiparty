@@ -13,6 +13,7 @@ public class Sala {
     
     private String NomeDaSala;
     private ArrayList<User> Members;
+    private AdminUser admin;
     
     /*remover user
     adicionar user
@@ -21,12 +22,5 @@ public class Sala {
     play music
     votação a escolher musica
     */
-    
-    /*o tóze gosta de piça
-    e o birto é um cócó
-    */
-
-    //O ajshdkashdhaskdhuiashdihasidsiahdisahdiashdhxzkc
-    //sjahakhdkjadkaldljasdjh
     
 }

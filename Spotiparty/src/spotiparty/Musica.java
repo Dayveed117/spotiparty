@@ -17,6 +17,7 @@ public class Musica {
     private String titulo, autor, genero, album;
     
     public Musica() {
+        
     }
     
     public Musica(double duracao, double rating, String titulo, String autor, String album, String genero) {

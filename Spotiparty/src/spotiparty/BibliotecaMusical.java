@@ -26,7 +26,7 @@ public class BibliotecaMusical {
         this.Musicas = Musicas;
     }
     
-    public void adicionarMusica(Musica mus) {
+    public void adicionar_Musica(Musica mus) {
         if(Musicas.contains(mus)) {
               JOptionPane.showMessageDialog(null, "Essa musica já esta na biblioteca!");
         }
@@ -36,7 +36,7 @@ public class BibliotecaMusical {
         }
     }
     
-    public void removerMusica(Musica mus) {
+    public void remover_Musica(Musica mus) {
         if(Musicas.contains(mus)) {
             Musicas.remove(mus);
             JOptionPane.showMessageDialog(null, "Musica removida da Biblioteca");
@@ -53,6 +53,15 @@ public class BibliotecaMusical {
             s += m.toString();
         }
         return(s);
+    }
+    
+    public void verificar_musica(Musica mus) {
+        if(Musicas.contains(mus)) {
+            JOptionPane.showMessageDialog(null, "A música está na biblioteca");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "A música não está na biblitoteca");
+        }
     }
     
 }
