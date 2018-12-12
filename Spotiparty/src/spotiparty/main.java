@@ -14,8 +14,31 @@ import javax.swing.JOptionPane;
 
 public class main{
     
-    public static void adicionar_user_sala(Sala sala, User user) { 
+    
+    public static void adicionar_user_sala() { 
     //usar isto e verificar se o current user é o admin
+        
+    }
+    
+    //Recebe a sala e o user que a criou (ArrayList<String> m , Sala s, ArrayList<String> Membros,String musicaAtual)
+    public static void criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
+        String s="";
+
+        for(int i =0 ; i< 10;i++){
+            
+            if(Membros.get(i).getNome() == null){
+                System.out.println("Hello");
+            }
+            
+            s =  s + Membros.get(i).getNome()    +  "                             " +  m.get(i)   + "                              "+ musicas.get(j).getTitulo() + "                 \n ";
+        }
+        
+        
+        
+        JOptionPane.showInputDialog(null,"Membros :                          Chat:                                  Musica Atual :           \n "
+                +                        s);
+        
+        
     }
 
     
@@ -50,6 +73,7 @@ public class main{
        ArrayList<UserNormal> users = new ArrayList<UserNormal>(20);
        ArrayList<Sala> salas = new ArrayList<Sala>(5);
        ArrayList<Musica> playlist = new ArrayList<Musica>();
+       int j ; // Controla as musicas
 
 
        //Variaveis unicas
@@ -197,15 +221,9 @@ public class main{
                   String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                     + "Digite o nome da sala \n");
                   JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                  AdminUser admin_sala = new AdminUser((UserNormal) current_user,true);
-                    
+                  Sala nova_sala = new Sala(nome_sala,current_user);
+                  criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),0);
                }
-
-
-               //TODO -> Melhorar a dinamicidade da coisa
-               JOptionPane.showInputDialog(null,"Membros :           Chat :         ");
-
-
           }
                
 
