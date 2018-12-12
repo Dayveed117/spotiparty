@@ -4,20 +4,18 @@
  * and open the template in the editor.
  */
 package SpotiParty;
-import java.util.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 public class User {
     
 
-    
     public String nome;
-    ArrayList<Amigos> amigos = new ArrayList<Amigos>();
 
     public User(User u){
         this.nome = u.getNome();
     }
-    
     
     public User(){
         nome = "";
@@ -34,7 +32,5 @@ public class User {
     public void setNome(String n){
         nome = n;
     }
-    
-    
     
 }

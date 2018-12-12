@@ -14,16 +14,17 @@ import javax.swing.JOptionPane;
  */
 public class UserNormal extends User{
     
-    private int Idade;
+    private int Idade, ID;
     private String Nickname;
     private String Password;
     private ArrayList<UserNormal> amigos = new ArrayList<UserNormal>();
    
-    public UserNormal(String n, String nick, String PW, int num) {
+    public UserNormal(String n, String nick, String PW, int idade, int ID) {
         super(n);
         Nickname = nick;
         Password = PW;
-        Idade = num;
+        this.Idade = idade;
+        this.ID = ID;
     }
     
     public UserNormal(UserNormal u){
@@ -31,6 +32,15 @@ public class UserNormal extends User{
         this.Nickname = u.getNick();
         this.Password = u.getPW();
         this.amigos = u.getAmigos();
+        this.ID = u.getID();
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
     
     
@@ -44,6 +54,10 @@ public class UserNormal extends User{
         return Idade;
     }
     
+    public ArrayList<UserNormal> getAmigos(){
+        return amigos;
+    }    
+    
     public void setNick(String nick){
         Nickname = nick;
     }
@@ -52,7 +66,7 @@ public class UserNormal extends User{
     }
 
     public UserNormal clone(){
-        UserNormal c = new UserNormal(super.getNome(),this.Nickname,this.Password,this.Idade);
+        UserNormal c = new UserNormal(super.getNome(),this.Nickname,this.Password,this.Idade, this.ID);
         return c;
     }
     
@@ -82,7 +96,7 @@ public class UserNormal extends User{
     }
         
         
-      public String listaramigos(){
+      public String listar_amigos(){
         
         String s = "";
         
@@ -91,16 +105,9 @@ public class UserNormal extends User{
         }
         return s;
     }
-       
-      
-    public ArrayList<UserNormal> getAmigos(){
-        return amigos;
-        
-    }
-    
-         
-    
-    public String toString(){
+     
+      public String toString(){
         return ("Nome: " + nome + "\n Nickname: " + Nickname + "\n Idade: " + Idade);
-    }
+    }  
+      
 }
