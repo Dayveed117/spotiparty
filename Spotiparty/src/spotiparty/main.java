@@ -62,7 +62,7 @@ public class main{
     public static boolean is_in_list(String nome, ArrayList<UserNormal> lista){
         boolean encontrou = false;
         for(int i = 0;i < lista.size() ; i++){
-            if(lista.get(i).getNome() ==  nome){
+            if(lista.get(i).getNome().equals(nome)) {
                 encontrou = true;
             }
         }
