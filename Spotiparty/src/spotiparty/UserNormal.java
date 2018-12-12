@@ -38,7 +38,17 @@ public class UserNormal extends User{
         this.ID = ID;
         ID++;
     }
-
+    
+    public UserNormal()
+    {
+        this.ID = ID;
+        ID++;
+        this.Idade = 0;
+        this.Nickname = "";
+        this.Password = "";
+    }
+    
+    
     public int getID() {
         return ID;
     }
