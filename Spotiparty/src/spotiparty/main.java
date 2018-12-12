@@ -17,16 +17,12 @@ public class main{
    
     
     //Recebe a sala e o user que a criou (ArrayList<String> m , Sala s, ArrayList<String> Membros,String musicaAtual)
-    public static boolean criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
+    public static void criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
         String s="";
         String msg="v";
         int mc =0;
        
-        
-        if(msg == null || msg ==""){
-           return false;
-       }
-
+       
 
         for(int i =0 ; i< m.size();i++){
             
@@ -37,21 +33,12 @@ public class main{
         
         
          msg = JOptionPane.showInputDialog(null,"Membros :                          Chat:                                  Musica Atual :           \n "
-                +                        s);
-                    
-         
-         
-  
-         
-        m.add(msg);
-        Membros.add(new UserNormal());
-        musicas.add(new Musica());
-
-            
-        return criar_sala(sala,m,Membros,musicas,j);
-        
+                +                        s);   
        
-       
+         
+         if(msg == "0"){
+             System.exit(0);
+         }
  
     }
 
@@ -66,6 +53,8 @@ public class main{
         
         return encontrou;
     }
+    
+    
     
     
     public static UserNormal get_user(String nome,ArrayList<UserNormal> lista){
