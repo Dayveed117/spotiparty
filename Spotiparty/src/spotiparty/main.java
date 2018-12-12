@@ -32,8 +32,8 @@ public class main{
             
             s =  s + Membros.get(i).getNome()    +  "                             " +  m.get(i)   + "                              "+ musicas.get(j).getTitulo() + "                 \n ";
         }
-        
-        
+         
+       
         
         JOptionPane.showInputDialog(null,"Membros :                          Chat:                                  Musica Atual :           \n "
                 +                        s);
