@@ -19,7 +19,7 @@ public class main{
     }
 
     
-    public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
+    public static boolean is_in_list(String nome, ArrayList<UserNormal> lista){
         boolean encontrou = false;
         for(int i = 0;i < lista.size() ; i++){
             if(lista.get(i).getNome() == nome){
@@ -31,7 +31,7 @@ public class main{
     }
     
     
-    public static UserNormal get_user(String nome,ArrayList<UserNormal> lista){
+    public static UserNormal get_user(String nome, ArrayList<UserNormal> lista){
         boolean encontrou = false;
         for(int i = 0;i < lista.size() ; i++){
             if(lista.get(i).getNome() == nome){
