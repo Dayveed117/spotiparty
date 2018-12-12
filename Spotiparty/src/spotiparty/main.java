@@ -12,8 +12,12 @@ import javax.swing.JOptionPane;
 
 
 
-
 public class main{
+    
+    public static void adicionar_user_sala(Sala sala, User user) { 
+    //usar isto e verificar se o current user é o admin
+    }
+
     
     public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
         boolean encontrou = false;

@@ -10,9 +10,5 @@ package spotiparty;
  * @author a40284
  */
 public class Spotiparty {
-
-    public static void main(String[] args) {
-        
-    }
     
 }
