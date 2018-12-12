@@ -21,24 +21,42 @@ public class main{
     }
     
     //Recebe a sala e o user que a criou (ArrayList<String> m , Sala s, ArrayList<String> Membros,String musicaAtual)
-    public static void criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
+    public static boolean criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
         String s="";
+        String msg="v";
+        int mc =0;
+       
+        
+        if(msg == null || msg ==""){
+           return false;
+       }
 
-        for(int i =0 ; i< 10;i++){
+
+        for(int i =0 ; i< m.size();i++){
             
-            if(Membros.get(i).getNome() == null){
-                System.out.println("Hello");
-            }
             
-            s =  s + Membros.get(i).getNome()    +  "                             " +  m.get(i)   + "                              "+ musicas.get(j).getTitulo() + "                 \n ";
+            s =  s + Membros.get(i).getNome()    +  "                                      " +  m.get(i)   + "                              "+ musicas.get(j).getTitulo() + "                 \n ";
         }
         
         
         
-        JOptionPane.showInputDialog(null,"Membros :                          Chat:                                  Musica Atual :           \n "
+         msg = JOptionPane.showInputDialog(null,"Membros :                          Chat:                                  Musica Atual :           \n "
                 +                        s);
+                    
+         
+         
+  
+         
+        m.add(msg);
+        Membros.add(new UserNormal());
+        musicas.add(new Musica());
+
+            
+        return criar_sala(sala,m,Membros,musicas,j);
         
-        
+       
+       
+ 
     }
 
     
@@ -117,10 +135,7 @@ public class main{
            String password = JOptionPane.showInputDialog(null,"Insira a sua password \n");
            
            
-           UserNormal novo = new UserNormal(nome,nick,password,idade);
-           users.add(novo);
-           current_user = novo.clone();
-
+           current_user = new UserNormal(nome,nick,password,idade);
            
            JOptionPane.showMessageDialog(null, "Registo feito com sucesso!");
            
@@ -219,9 +234,11 @@ public class main{
                if(escolha_user == 2 && guest == false){
                    //Criar sala
                   String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
-                    + "Digite o nome da sala \n");
+                    + "Digite o numero da sala \n");
+                  
+                  int ms = Integer.parseInt(nome_sala);
                   JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                  Sala nova_sala = new Sala(nome_sala,current_user);
+                  Sala nova_sala = new Sala(ms,current_user);
                   criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),0);
                }
           }

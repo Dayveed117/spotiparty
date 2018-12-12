@@ -13,19 +13,19 @@ import javax.swing.JOptionPane;
  */
 public class Sala {
     
-    private String NomeDaSala;
-    private ArrayList<UserNormal> Membros;
+    private int NumeroDaSala;
+    private ArrayList<UserNormal> Membros  = new ArrayList<UserNormal>();
     private AdminUser admin;
-    private ArrayList<Musica> Musicas;
-    private ArrayList<String> Mensagens;
+    private ArrayList<Musica> Musicas = new ArrayList<Musica>();
+    private ArrayList<String> Mensagens = new ArrayList<String>();
     
     
     
-    public Sala(String NomeDaSala, UserNormal user) {
-        this.NomeDaSala = NomeDaSala;
-        this.Membros.add(new UserNormal());
+    public Sala(int NumeroDaSala, UserNormal user ) {
+        this.NumeroDaSala = NumeroDaSala;
         this.admin = new AdminUser(user,true);
-        this.Mensagens.add("Escreva alguma coisa !!!");
+        this.Membros.add(user);
+        this.Mensagens.add("Escreva algo");
         this.Musicas.add(new Musica());
     }
     
@@ -34,6 +34,7 @@ public class Sala {
     public ArrayList<Musica> getMusicas() {
         return Musicas;
     }
+    
 
     public void setMusicas(ArrayList<Musica> Musicas) {
         this.Musicas = Musicas;
@@ -47,12 +48,12 @@ public class Sala {
         this.Mensagens = Mensagens;
     }
     
-    public String getNomeDaSala() {
-        return NomeDaSala;
+    public int getNomeDaSala() {
+        return NumeroDaSala;
     }
 
-    public void setNomeDaSala(String NomeDaSala) {
-        this.NomeDaSala = NomeDaSala;
+    public void setNomeDaSala(int NumeroDaSala) {
+        this.NumeroDaSala = NumeroDaSala;
     }
 
     public ArrayList<UserNormal> getMembros() {
@@ -80,14 +81,14 @@ public class Sala {
         }
         else {
             Membros.add(user);
-            JOptionPane.showMessageDialog(null, user.getNome()+" juntou-se à sala "+NomeDaSala);
+            JOptionPane.showMessageDialog(null, user.getNome()+" juntou-se à sala "+NumeroDaSala);
         }
     }
     
     public void remover_user(Sala sala, User user) {
         if(Membros.contains(user)) {
             Membros.remove(user);
-            JOptionPane.showMessageDialog(null, user.getNome()+" removido da sala "+NomeDaSala);
+            JOptionPane.showMessageDialog(null, user.getNome()+" removido da sala "+NumeroDaSala);
         }
         else {
             JOptionPane.showMessageDialog(null, user.getNome()+" não encontrado");

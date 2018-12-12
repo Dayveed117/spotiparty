@@ -13,10 +13,12 @@ public class AdminUser extends UserNormal{
 
     public boolean is_Admin;
     
+    
     public AdminUser(UserNormal u, boolean Admin) {
         super(u);
         is_Admin = true;
     }
+    
     
     public boolean is_Admin(){
         return is_Admin;
