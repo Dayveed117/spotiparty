@@ -14,15 +14,22 @@ import javax.swing.JOptionPane;
 public class Sala {
     
     private String NomeDaSala;
-    private ArrayList<User> Membros;
+    private ArrayList<UserNormal> Membros;
     private AdminUser admin;
     private ArrayList<Musica> Musicas;
     private ArrayList<String> Mensagens;
     
-    public Sala(String NomeDaSala, User user) {
+    
+    
+    public Sala(String NomeDaSala, UserNormal user) {
         this.NomeDaSala = NomeDaSala;
-        this.admin = (AdminUser)user;
+        this.Membros.add(new UserNormal());
+        this.admin = new AdminUser(user,true);
+        this.Mensagens.add("Escreva alguma coisa !!!");
+        this.Musicas.add(new Musica());
     }
+    
+    
     
     public ArrayList<Musica> getMusicas() {
         return Musicas;
@@ -48,11 +55,11 @@ public class Sala {
         this.NomeDaSala = NomeDaSala;
     }
 
-    public ArrayList<User> getMembros() {
+    public ArrayList<UserNormal> getMembros() {
         return Membros;
     }
 
-    public void setMembross(ArrayList<User> Membros) {
+    public void setMembross(ArrayList<UserNormal> Membros) {
         this.Membros = Membros;
     }
 
@@ -67,7 +74,7 @@ public class Sala {
     //para remover uma sala basta por a sala toda a null e fazer print de sucesso??
     
     //checkar na main se o current_user é admin para fazer estas operações
-    public void adicionar_user(Sala sala, User user) {
+    public void adicionar_user(Sala sala, UserNormal user) {
         if(Membros.contains(user)) {
             JOptionPane.showMessageDialog(null, "Utilizador já está na sala");
         }
