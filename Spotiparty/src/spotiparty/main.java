@@ -34,6 +34,7 @@ public class main{
                 return lista.get(i);
             }
         }
+        return null;
 
     }
     
@@ -57,7 +58,7 @@ public class main{
       while(escolheu == 0){
           
            //Escolha do utilizador
-               String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " 
+               String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty \n" 
                + "1 - Registar \n"
                + "2 - Já tenho uma conta \n"
                + "3 - Entrar como guest  \n"
@@ -248,9 +249,7 @@ public class main{
             JOptionPane.showMessageDialog( null,"Your friends : \n"
               + current_user.listar_amigos());
              }
-       }
-       
-       
-       
-    }
-}
+            }
+          
+     }
+ }

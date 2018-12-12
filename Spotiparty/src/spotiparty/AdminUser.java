@@ -21,5 +21,5 @@ public class AdminUser extends UserNormal{
     public boolean is_Admin(){
         return is_Admin;
     }
-    
+
 }

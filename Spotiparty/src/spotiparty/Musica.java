@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spotiparty;
+package SpotiParty;
 
 import java.util.Objects;
 
@@ -103,5 +103,6 @@ public class Musica {
         return("\nTitulo: "+titulo+"\nArtista: "+autor+"; Album: "+album+
                 "; Genero: " +genero+"\nDuração: "+duracao+"Rating: "+rating+"\n");
     }
+    
     
 }

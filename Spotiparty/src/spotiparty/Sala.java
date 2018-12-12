@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spotiparty;
+package SpotiParty;
 import java.util.ArrayList;
 import static javafx.application.Platform.exit;
 import javax.swing.JOptionPane;
@@ -17,7 +17,7 @@ public class Sala {
     private ArrayList<User> Membros;
     private AdminUser admin;
     
-    
+        
     /*remover user
     adicionar user
     promover a admin
@@ -60,7 +60,7 @@ public class Sala {
         }
         else {
             Membros.add(user);
-            JOptionPane.showMessageDialog(null, +user.getNome()+" juntou-se à sala "+NomeDaSala);
+            JOptionPane.showMessageDialog(null, user.getNome()+" juntou-se à sala "+NomeDaSala);
         }
     }
     
@@ -71,6 +71,6 @@ public class Sala {
         }
         else {
             JOptionPane.showMessageDialog(null, user.getNome()+" não encontrado");
-        }
-    }
+        }}
+
 }
