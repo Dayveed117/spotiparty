@@ -120,7 +120,8 @@ public class main{
        if(escolha == 3 ){
             guest = true;
            //Cria um guest
-            User g = new User("guest");
+            User current_guest = new User("guest");
+            
        }
       }
        
@@ -178,7 +179,7 @@ public class main{
                   String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                     + "Digite o nome da sala \n");
                   JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                  AdminUser admin_sala = new AdminUser(current_user,true);
+                  AdminUser admin_sala = new AdminUser((UserNormal) current_user,true);
                     
                }
 
@@ -214,8 +215,8 @@ public class main{
                    }
                }
               
-              current_user.addFriend();
-           }
+                
+           
            
 
            //Remover Amigo

@@ -14,17 +14,20 @@ import javax.swing.JOptionPane;
  */
 public class UserNormal extends User{
     
-    private int Idade, ID;
+    private static  int ID = 1;
+    private int Idade;
     private String Nickname;
     private String Password;
     private ArrayList<UserNormal> amigos = new ArrayList<UserNormal>();
    
-    public UserNormal(String n, String nick, String PW, int idade, int ID) {
+    public UserNormal(String n, String nick, String PW, int idade) {
         super(n);
+        
         Nickname = nick;
         Password = PW;
         this.Idade = idade;
         this.ID = ID;
+        ID++;
     }
     
     public UserNormal(UserNormal u){
@@ -32,7 +35,8 @@ public class UserNormal extends User{
         this.Nickname = u.getNick();
         this.Password = u.getPW();
         this.amigos = u.getAmigos();
-        this.ID = u.getID();
+        this.ID = ID;
+        ID++;
     }
 
     public int getID() {
