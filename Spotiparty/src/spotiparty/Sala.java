@@ -107,7 +107,7 @@ public class Sala {
      
     public Musica play_music(String titulo, String autor) {
         for(Musica m: Musicas) {
-            if((m.getTitulo() == titulo) && (m.getAutor() == autor)) {
+            if((m.getTitulo().equals(titulo)) && (m.getAutor().equals(autor))) {
                 return m;
             }
             break;

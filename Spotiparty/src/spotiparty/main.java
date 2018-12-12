@@ -46,10 +46,6 @@ public class main{
 
         for(int i =0 ; i< 10;i++){
             
-            if(Membros.get(i).getNome() == null){
-                System.out.println("Hello");
-            }
-            
             s =  s + Membros.get(i).getNome()    +  "                             " +  m.get(i)   + "                              "+ musicas.get(j).getTitulo() + "                 \n ";
         }
         
@@ -65,7 +61,7 @@ public class main{
     public static boolean is_in_list(String nome, ArrayList<UserNormal> lista){
         boolean encontrou = false;
         for(int i = 0;i < lista.size() ; i++){
-            if(lista.get(i).getNome() == nome){
+            if(lista.get(i).getNome() ==  nome){
                 encontrou = true;
             }
         }
