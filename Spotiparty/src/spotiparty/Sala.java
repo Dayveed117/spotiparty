@@ -20,6 +20,8 @@ public class Sala {
     private ArrayList<String> Mensagens;
     
     
+    public Sala() {
+    }
     
     public Sala(String NomeDaSala, UserNormal user) {
         this.NomeDaSala = NomeDaSala;
@@ -28,8 +30,7 @@ public class Sala {
         this.Mensagens.add("Escreva alguma coisa !!!");
         this.Musicas.add(new Musica());
     }
-    
-    
+
     
     public ArrayList<Musica> getMusicas() {
         return Musicas;
@@ -74,7 +75,7 @@ public class Sala {
     //para remover uma sala basta por a sala toda a null e fazer print de sucesso??
     
     //checkar na main se o current_user é admin para fazer estas operações
-    public void adicionar_user(Sala sala, UserNormal user) {
+    public void adicionar_user(UserNormal user) {
         if(Membros.contains(user)) {
             JOptionPane.showMessageDialog(null, "Utilizador já está na sala");
         }
@@ -84,7 +85,7 @@ public class Sala {
         }
     }
     
-    public void remover_user(Sala sala, User user) {
+    public void remover_user(UserNormal user) {
         if(Membros.contains(user)) {
             Membros.remove(user);
             JOptionPane.showMessageDialog(null, user.getNome()+" removido da sala "+NomeDaSala);
@@ -94,9 +95,15 @@ public class Sala {
         }
     }
     
-    public void print_mensagem(String s) {
-        System.out.println(s);
-    }    
+    public void promover(UserNormal user) {
+        if(Membros.contains(user)) {
+            user = (AdminUser)user;
+            JOptionPane.showInputDialog(null,  user.getNome()+"promovido a admin");
+        }
+        else {
+             JOptionPane.showInputDialog(null,"User not found");
+        }
+    }
      
     public Musica play_music(String titulo, String autor) {
         for(Musica m: Musicas) {

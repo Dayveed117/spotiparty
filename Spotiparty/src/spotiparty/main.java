@@ -15,11 +15,31 @@ import javax.swing.JOptionPane;
 public class main{
     
     
-    public static void adicionar_user_sala() { 
-    //usar isto e verificar se o current user é o admin
-        
+    public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
+        sala.adicionar_user(user);
+    }                       
+            
+    public static void remover_user_sala(Sala sala, UserNormal user) {      //  antes de chamar a função ver se o current user é admin
+        sala.remover_user(user);
     }
     
+    public static void promover_user_sala(Sala sala, UserNormal user) {
+        sala.promover(user);
+    }
+    
+    public static String print_mensagens_sala(Sala sala) {                //print das ultimas 5 mensagens?
+        String ss = "";
+        int cont=0;
+        
+        for(String s: sala.getMensagens()) {
+            cont++;
+            if(cont >= sala.getMensagens().size()-5) {
+               ss += s+"\n";
+            }
+        }
+        return ss;
+    }
+        
     //Recebe a sala e o user que a criou (ArrayList<String> m , Sala s, ArrayList<String> Membros,String musicaAtual)
     public static void criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
         String s="";
@@ -117,7 +137,7 @@ public class main{
            String password = JOptionPane.showInputDialog(null,"Insira a sua password \n");
            
            
-           UserNormal novo = new UserNormal(nome,nick,password,idade);
+           UserNormal novo = new UserNormal(nome, nick, password, idade);
            users.add(novo);
            current_user = novo.clone();
 
@@ -221,8 +241,8 @@ public class main{
                   String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                     + "Digite o nome da sala \n");
                   JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                  Sala nova_sala = new Sala(nome_sala,current_user);
-                  criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),0);
+                  Sala nova_sala = new Sala(nome_sala, current_user);
+                  criar_sala(nova_sala, nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),0);
                }
           }
                
