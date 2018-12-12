@@ -14,11 +14,7 @@ import javax.swing.JOptionPane;
 
 public class main{
     
-    
-    public static void adicionar_user_sala() { 
-    //usar isto e verificar se o current user é o admin
-        
-    }
+   
     
     //Recebe a sala e o user que a criou (ArrayList<String> m , Sala s, ArrayList<String> Membros,String musicaAtual)
     public static boolean criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
