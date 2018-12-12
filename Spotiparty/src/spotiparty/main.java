@@ -26,6 +26,19 @@ public class main{
         return encontrou;
     }
     
+    
+    public static UserNormal get_user(String nome,ArrayList<UserNormal> lista){
+        boolean encontrou = false;
+        for(int i = 0;i < lista.size() ; i++){
+            if(lista.get(i).getNome() == nome){
+                return lista.get(i);
+            }
+        }
+
+    }
+    
+    
+    
     public static void main(String[] args) {
         
        //Arrays 
@@ -35,7 +48,7 @@ public class main{
 
 
        //Variaveis unicas
-       User current_user = new User(); // Variavel para guardar o current user 
+       UserNormal current_user = new UserNormal(); // Variavel para guardar o current user 
        boolean guest = false ;
        String choice2;
        int n_sala , escolheu=0;
@@ -210,8 +223,8 @@ public class main{
            if(amigos_escolha == 1){
               String a =  JOptionPane.showInputDialog(null,"Que amigo pretende adicionar ? ");
                if(is_in_list(a,users)){
-                   
-                       
+                   current_user.addFriend(get_user(a,users));
+                       JOptionPane.showMessageDialog(null,"Amigo adicionado com sucesso ");
                    }
                }
               
@@ -221,7 +234,11 @@ public class main{
 
            //Remover Amigo
            if(amigos_escolha == 2){
-            current_user.removeAmigo();
+            String a =  JOptionPane.showInputDialog(null,"Que amigo pretende adicionar ? ");
+               if(is_in_list(a,users)){
+                   current_user.removeAmigo(get_user(a,users));
+                       JOptionPane.showMessageDialog(null,"Amigo removido com sucesso ");
+                   }
                
            }
            
@@ -229,7 +246,7 @@ public class main{
            //Listar os amigos
            if(amigos_escolha == 3){
             JOptionPane.showMessageDialog( null,"Your friends : \n"
-              + current_user.listaramigos());
+              + current_user.listar_amigos());
              }
        }
        

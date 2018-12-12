@@ -31,6 +31,7 @@ public class UserNormal extends User{
     }
     
     public UserNormal(UserNormal u){
+        super(u.getNome()); 
         this.Idade = u.getIdade();
         this.Nickname = u.getNick();
         this.Password = u.getPW();
@@ -41,6 +42,7 @@ public class UserNormal extends User{
     
     public UserNormal()
     {
+        super();
         this.ID = ID;
         ID++;
         this.Idade = 0;
@@ -80,7 +82,7 @@ public class UserNormal extends User{
     }
 
     public UserNormal clone(){
-        UserNormal c = new UserNormal(super.getNome(),this.Nickname,this.Password,this.Idade, this.ID);
+        UserNormal c = new UserNormal(super.getNome(),this.Nickname,this.Password,this.Idade);
         return c;
     }
     
