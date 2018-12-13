@@ -118,6 +118,11 @@ public class ClasseTeste {
         UserNormal current_user = new UserNormal();
         int j ; // usada para circular musicas
         boolean guest = false;
+        
+        
+        int an = -2;
+       
+        do {
 
         int mp; // menu principal
         mp = menu_principal();
@@ -141,6 +146,7 @@ public class ClasseTeste {
            
                 int mLI1 = menu_loggedIn(current_user, guest);           //menu Logged In
                 
+
                 switch (mLI1) {
                     
                     case 1:         //caso para entrar numa sala já existente
@@ -225,14 +231,19 @@ public class ClasseTeste {
                 
             case 4:         //caso para sair da aplicação
                 
-                int an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
+                an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                 System.out.println(an);
-                if(an == 0){
+                if(an < 0){
                       System.exit(0);
                 }
                 
                 break;
         }
-    }
-}
+        
+        
+        }while(an > 0);     // repeticao do menu principal enquanto nao der exit
+        
+        
+    }//fim do main
+}//fim da classe 
 
