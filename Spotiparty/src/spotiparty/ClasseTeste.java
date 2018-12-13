@@ -112,9 +112,9 @@ public class ClasseTeste {
     
     public static void main(String[] args) {
 
-        ArrayList<UserNormal> users = new ArrayList<UserNormal>(20);
-        ArrayList<Sala> salas = new ArrayList<Sala>(5);
-        ArrayList<Musica> playlist = new ArrayList<Musica>();
+        ArrayList<UserNormal> users = new ArrayList<>(20);
+        ArrayList<Sala> salas = new ArrayList<>(5);
+        ArrayList<Musica> playlist = new ArrayList<>();
         UserNormal current_user = new UserNormal();
         int j ; // usada para circular musicas
         boolean guest = false;
@@ -139,9 +139,9 @@ public class ClasseTeste {
 
            JOptionPane.showMessageDialog(null, "Registo feito com sucesso!");
            
-                int mLI = menu_loggedIn(current_user, guest);           //menu Logged In
+                int mLI1 = menu_loggedIn(current_user, guest);           //menu Logged In
                 
-                switch (mLI) {
+                switch (mLI1) {
                     
                     case 1:         //caso para entrar numa sala já existente
                         
@@ -168,6 +168,55 @@ public class ClasseTeste {
                 
             case 2:         //caso para fazer log in
                 
+                if(users.isEmpty() == false) {
+                
+                    boolean verificacao = false;
+                
+                    do {
+                    
+                     String nickname = JOptionPane.showInputDialog(null,"Insira o seu nickname ");
+                     String pass = JOptionPane.showInputDialog(null,"Insira a password ");      // TODO -> meter a pssword com asteriscos 
+                     
+                     for(UserNormal user: users) {
+                         if(user.getNick().equals(nickname) && user.getPW().equals(pass)) {
+                             verificacao = true;
+                             current_user = new UserNormal(user);
+                             break;
+                         }
+                         else {
+                             JOptionPane.showMessageDialog(null,"Dados incorretos , tente outra vez.");
+                         }      
+                     }
+                     }while(verificacao == false);
+                    
+                    int mLI2 = menu_loggedIn(current_user, guest);
+                    
+                    switch (mLI2) {
+                    
+                          case 1:         //caso para entrar numa sala já existente
+                        
+                              break;
+                        
+                          case 2:         //caso para criar uma sala nova
+                        
+                              break;
+                        
+                          case 3:         //caso para ver friendslist
+                        
+                              break;
+                        
+                          case 4:         //caso para listar musicas
+                        
+                              break;
+                        
+                           case 5:         //caso para sair da aplicação
+                        
+                              break;
+                        
+                     }
+                }
+                     JOptionPane.showMessageDialog(null,"Nenhum utilizador registado.");
+                     
                 break;
                 
             case 3:         //caso para entrar como guest
