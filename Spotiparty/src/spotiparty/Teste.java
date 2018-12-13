@@ -36,17 +36,22 @@ public class Teste {
 
         for(int i =0 ; i< m.size();i++){
             
+            if(i == 0){
+            s =  s + m.get(i)   + "                  "+ musicas.get(0).getTitulo() + "                 \n ";
+            }
             
-            s =  s + m.get(i)   + "                              "+ musicas.get(0).getTitulo() + "                 \n ";
+            else{
+            s =  s + m.get(i)   + "                                   \n ";}
         }
         
        
         
          msg = JOptionPane.showInputDialog(null,"Chat:                                  Musica Atual :           \n "+
                  s 
-                 +  "                                                                                       0 - Exit \n"
+                 + "                                                                                        0 - Exit \n"
                  + "                                                                                        1 - Adicionar user á sala \n "
-                 + "                                                                                        2 - Ver users \n");
+                 + "                                                                                        2 - Ver os users nesta sala \n "
+                 + "                                                                                        4 - Mudar Musica \n");
          
          
         try{
@@ -61,9 +66,8 @@ public class Teste {
                     for(int i = 0;i < users.size();i++){
                         if(u == users.get(i).getNome()){
                             UserNormal userr = users.get(i).clone();
-                            sala.adicionar_user(sala, userr);
-                            musicas.add(new Musica());
                             Membros.add(userr);
+                            JOptionPane.showMessageDialog(null,"User adicionado com sucesso");
                             criar_sala(sala,m,Membros,musicas,users);
                             
                         }
@@ -72,34 +76,47 @@ public class Teste {
                
             }
             
-
-            
             //Ver amigos
             if(j == 2){
                 String name_ =" ";
-                for( int i = 0; i < sala.getMembros().size();i++){
-                    name_ = name_ + sala.getMembros().get(i).getNome();
+                for( int i = 0; i < Membros.size();i++){
+                    name_ = name_ + Membros.get(i).getNome();
                 }
                 
-                JOptionPane.showMessageDialog(null, name_);
-                criar_sala(sala,m,Membros,musicas,users);
-                
-                
-                
+                JOptionPane.showMessageDialog(null,name_);
+                criar_sala(sala,m,Membros,musicas,users);   
             }
-        }
-        catch(Exception e){
+            
+            if(j == 4){
+                String music = JOptionPane.showInputDialog(null,"Que musica quer ouvir ? ");
+                musicas.get(0).setTitulo(music);
+                criar_sala(sala,m,Membros,musicas,users);
+            }
+            
+           
             
         }
-         
-         
+        catch(Exception e){
+            if(m.size() == 10){
+                JOptionPane.showMessageDialog(null,"Numero máximo de mensagens ! A limpar o chat....");
+                m = new ArrayList<String>();
+                criar_sala(sala,m,Membros,musicas,users);
+            }
+            
             m.add(msg);
-            musicas.add(new Musica());
             criar_sala(sala,m,Membros,musicas,users);
+            
+        }
+        
+            
+         
+         
             
         
  
     }
+    
+    
     
     
     public static void entrar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,ArrayList<UserNormal> users){
@@ -112,17 +129,21 @@ public class Teste {
 
         for(int i =0 ; i< m.size();i++){
             
+            if(i == 0){
+            s =  s + m.get(i)   + "                  "+ musicas.get(0).getTitulo() + "                 \n ";
+            }
             
-            s =  s + m.get(i)   + "                              "+ musicas.get(0).getTitulo() + "                 \n ";
+            else{
+            s =  s + m.get(i)   + "                                   \n ";}
         }
         
        
         
          msg = JOptionPane.showInputDialog(null,"Chat:                                  Musica Atual :           \n "+
                  s 
-                 +  "                                                                                       0 - Exit \n"
-                 + "                                                                                        1 - Adicionar user á sala \n "
-                 + "                                                                                        2 - Ver users \n");
+                 + "                                                                                        0 - Exit \n"
+                 + "                                                                                        1 - Ver os users nesta sala \n "
+                 + "                                                                                        2 - Mudar Musica \n");
          
          
         try{
@@ -130,38 +151,41 @@ public class Teste {
             if(j == 0 ){
              System.exit(0);
               }
-            if(j == 1){
-                JOptionPane.showMessageDialog(null,"COiso");
-                }
-            
-
-            
+          
             //Ver amigos
-            if(j == 2){
+            if(j == 1){
                 String name_ =" ";
-                for( int i = 0; i < sala.getMembros().size();i++){
-                    name_ = name_ + sala.getMembros().get(i).getNome();
+                for( int i = 0; i < Membros.size();i++){
+                    name_ = name_ + Membros.get(i).getNome();
                 }
                 
-                JOptionPane.showMessageDialog(null, name_);
-                criar_sala(sala,m,Membros,musicas,users);
-                
-                
-                
+                JOptionPane.showMessageDialog(null,name_);
+                criar_sala(sala,m,Membros,musicas,users);   
             }
+            
+            if(j == 2){
+                String music = JOptionPane.showInputDialog(null,"Que musica quer ouvir ? ");
+                musicas.get(0).setTitulo(music);
+                criar_sala(sala,m,Membros,musicas,users);
+            }
+            
+           
+            
         }
         catch(Exception e){
+            if(m.size() == 10){
+                JOptionPane.showMessageDialog(null,"Numero máximo de mensagens ! A limpar o chat....");
+                m = new ArrayList<String>();
+                criar_sala(sala,m,Membros,musicas,users);
+            }
             
-        }
-         
-         
             m.add(msg);
-            musicas.add(new Musica());
             criar_sala(sala,m,Membros,musicas,users);
             
-        
-
+        }
     }
+    
+    
 
     
     
@@ -262,6 +286,9 @@ public class Teste {
         }
     }
     
+    
+    
+    
     public static void main(String[] args) {
 
         ArrayList<UserNormal> users = new ArrayList<>(20);
@@ -299,7 +326,7 @@ public class Teste {
            JOptionPane.showMessageDialog(null, "Registo feito com sucesso!");
            
                 int mLI1 = menu_loggedIn(current_user, guest);           //menu Logged In
-                
+                 
 
                 switch (mLI1) {
                     
@@ -371,11 +398,18 @@ public class Teste {
                               break;
                         
                           case 2:         //caso para criar uma sala nova
-                        
+                                String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
+                              + "Digite o numero da sala \n");
+
+                            int ms = Integer.parseInt(nome_sala);
+                            JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
+                            Sala nova_sala = new Sala(ms,current_user);
+                            criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),users);
                               break;
                         
                           case 3:         //caso para ver friendslist
-                        
+                              JOptionPane.showMessageDialog( null,"Your friends : \n"
+                            + current_user.listar_amigos());
                               break;
                         
                           case 4:         //caso para listar musicas
@@ -384,17 +418,42 @@ public class Teste {
                         
                            case 5:         //caso para sair da aplicação
                         
+                        int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
+                        if(and == 0){
+                           System.exit(0);
                               break;
                         
                      }
                 }
                      JOptionPane.showMessageDialog(null,"Nenhum utilizador registado.");
-                     
+                }         
+                break;
+                       
+            case 3:  
+                //caso para entrar como guest
+                int mLI2 = menu_loggedIn(current_user, true);
+                
+                switch(mLI2){
+                          case 1:         //caso para entrar numa sala já existente
+
+                                   break;
+
+                        
+
+                        case 2:         //caso para sair da aplicação
+
+                                int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
+                                if(and == 0){
+                                   System.exit(0);
+                                break;
+
+                                 }
+        }
+        
+                
                 break;
                 
-            case 3:         //caso para entrar como guest
-                
-                break;
+       
                 
             case 4:         //caso para sair da aplicação
                 
