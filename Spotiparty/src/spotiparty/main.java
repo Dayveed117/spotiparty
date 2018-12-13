@@ -154,7 +154,7 @@ public class main{
              String password = JOptionPane.showInputDialog(null,"Insira a password "); // TODO -> meter a pssword com asteriscos 
              
              
-             //Verirficar se os dados estão corretos com os users registadors 
+             //Verirficar se os dados estão corretos com os users registados 
               for(int i = 0 ;  i < users.size() ; i++){
                 if(nickname == users.get(i).getNick()){ 
                   if(password == users.get(i).getPW()){
