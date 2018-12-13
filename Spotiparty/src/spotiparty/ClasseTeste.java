@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spotiparty;
+package SpotiParty;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -13,6 +13,31 @@ import javax.swing.JOptionPane;
  */
 public class ClasseTeste {
     
+        public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
+        sala.adicionar_user(user);
+    }                       
+            
+    public static void remover_user_sala(Sala sala, UserNormal user) {      //  antes de chamar a função ver se o current user é admin
+        sala.remover_user(user);
+    }
+    
+    public static void promover_user_sala(Sala sala, UserNormal user) {
+        sala.promover(user);
+    }
+    
+    public static String print_mensagens_sala(Sala sala) {                //print das ultimas 5 mensagens?
+        String ss = "";
+        int cont=0;
+        
+        for(String s: sala.getMensagens()) {
+            cont++;
+            if(cont >= sala.getMensagens().size()-5) {
+               ss += s+"\n";
+            }
+        }
+        return ss;
+    }
+
     public static int menu_principal() {
             
                 String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty! Log in, sign up, ou entra como um guest! \n" 
@@ -37,85 +62,124 @@ public class ClasseTeste {
     }
     
     
-    public static int menu_loggedIn(User current_user) {
-        
-        String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty \n" +  current_user.getNome()  + " \n "
+    public static int menu_loggedIn(User current_user, boolean guest) {            //nao sei se isto aqui está mal se é na main
+
+        if(guest == false) {
+
+        String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty!\n"
                + "1 - Entrar numa sala \n"
                + "2 - Criar sala \n"
                + "3 - Ver amigos \n"
-               + "4 - Exit ");
+               + "4 - Ver musicas \n"
+               + "5 - Exit ");
         
                int escolha = Integer.parseInt(choice);
-               
-               while(escolha < 1 || escolha > 4) {
+               while(escolha < 1 || escolha > 5) {
                    
-               choice = JOptionPane.showInputDialog(null, "Welcome to SpotiParty!\n" + current_user.getNome() + "\n" 
+               choice = JOptionPane.showInputDialog(null, "Welcome to SpotiParty!\n"
                + "1 - Entrar numa sala \n"
                + "2 - Criar sala \n"
                + "3 - Ver amigos \n"
-               + "4 - Exit ");
+               + "4 - Ver musicas \n"
+               + "5 - Exit\nWhy are you dumb");
                    
-                    escolha = Integer.parseInt(choice);
+               escolha = Integer.parseInt(choice);
                     
                }
                return escolha;
-           
+        }
+        
+        else {
+        
+        String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " + " guest \n "
+               + "1 - Entrar numa sala \n"
+               + "2 - Exit ");
+        
+               int escolha = Integer.parseInt(choice);
+               
+               while(escolha < 1 || escolha > 2) {
+                   
+                   choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " + " guest \n "
+               + "1 - Entrar numa sala \n"
+               + "2 - Exit\nPick a number you dumbass guest");
+                   
+                   escolha = Integer.parseInt(choice);
+                   
+               }
+               return escolha;
+        }
     }
     
     public static void main(String[] args) {
-        
-               //Arrays 
-       ArrayList<SpotiParty.UserNormal> users = new ArrayList<SpotiParty.UserNormal>(20);
-       ArrayList<SpotiParty.Sala> salas = new ArrayList<SpotiParty.Sala>(5);
-       ArrayList<SpotiParty.Musica> playlist = new ArrayList<SpotiParty.Musica>();
-       int j ; // Controla as musicas
 
+        ArrayList<UserNormal> users = new ArrayList<UserNormal>(20);
+        ArrayList<Sala> salas = new ArrayList<Sala>(5);
+        ArrayList<Musica> playlist = new ArrayList<Musica>();
+        UserNormal current_user = new UserNormal();
+        int j ; // usada para circular musicas
+        boolean guest = false;
 
-       //Variaveis unicas
-       SpotiParty.UserNormal current_user = new SpotiParty.UserNormal(); // Variavel para guardar o current user 
-       boolean guest = false ;
-       int n_sala;
+        int mp; // menu principal
+        mp = menu_principal();
         
-        
-        int num;
-        num = menu_principal();
-        boolean exit = false;
 
-        switch (num) {
+        switch (mp) {
             
-            case 1:     //caso para fazer registo
+            case 1:         //caso para fazer registo
                 
            String nome = JOptionPane.showInputDialog(null,"Insira o seu nome \n ");
            String nick = JOptionPane.showInputDialog(null,"Insira o seu nickname \n ");
-           String numb = JOptionPane.showInputDialog(null,"Insira a sua idade \n ");
-           int idade = Integer.parseInt(numb);
+           String num = JOptionPane.showInputDialog(null,"Insira a sua idade \n ");
+           int idade = Integer.parseInt(num);
            String password = JOptionPane.showInputDialog(null,"Insira a sua password \n");
            
-           
-           SpotiParty.UserNormal novo = new SpotiParty.UserNormal(nome, nick, password, idade);
+           UserNormal novo = new UserNormal(nome, nick, password, idade);
            users.add(novo);
            current_user = novo.clone();
 
-           
            JOptionPane.showMessageDialog(null, "Registo feito com sucesso!");
+           
+                int mLI = menu_loggedIn(current_user, guest);           //menu Logged In
+                
+                switch (mLI) {
+                    
+                    case 1:         //caso para entrar numa sala já existente
+                        
+                        break;
+                        
+                    case 2:         //caso para criar uma sala nova
+                        
+                        break;
+                        
+                    case 3:         //caso para ver friendslist
+                        
+                        break;
+                        
+                    case 4:         //caso para listar musicas
+                        
+                        break;
+                        
+                    case 5:         //caso para sair da aplicação
+                        
+                        break;
+                }
+                 
+                break;
+                
+            case 2:         //caso para fazer log in
                 
                 break;
                 
-            case 2:
+            case 3:         //caso para entrar como guest
                 
                 break;
                 
-            case 3:
-                
-                break;
-                
-            case 4:
+            case 4:         //caso para sair da aplicação
                 
                 int an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                 System.out.println(an);
                 if(an == 0){
-                      //System.exit(0);
-                      exit = true;
+                      System.exit(0);
                 }
                 
                 break;

@@ -41,12 +41,12 @@ public class main{
     }
         
     //Recebe a sala e o user que a criou (ArrayList<String> m , Sala s, ArrayList<String> Membros,String musicaAtual)
-    public static void criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,int j ){
+    public static void criar_sala(Sala sala, ArrayList<String> m, ArrayList<UserNormal> Membros, ArrayList<Musica> musicas, int j){
         String s="";
         String msg = "";
 
         for(int i =0 ; i< 10;i++){
-            
+
             s =  s + Membros.get(i).getNome()    +  "                             " +  m.get(i)   + "                              "+ musicas.get(j).getTitulo() + "                 \n ";
         }
          
