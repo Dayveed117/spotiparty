@@ -68,8 +68,8 @@ public class Sala {
         return admin;
     }
 
-    public void setAdmin(AdminUser admin) {      //na main apenas o admin poder promover outro admin
-        this.admin = admin;
+    public void setAdmin(UserNormal admin) {      //na main apenas o admin poder promover outro admin
+        this.admin = new AdminUser(admin,true);
     }
     
     //para remover uma sala basta por a sala toda a null e fazer print de sucesso??
