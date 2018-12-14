@@ -18,14 +18,14 @@ import javax.swing.JOptionPane;
  *
  * @author a40284
  */
-public class ClasseTeste_3 {
+public class ClasseTeste_4 {
     
   
     public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
         
           try{	
               
-                String basePath = new File("users.dat").getAbsolutePath();
+              String basePath = new File("users.dat").getAbsolutePath();
 		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(basePath));
                 
                 os.writeObject(users);								
@@ -40,13 +40,18 @@ public class ClasseTeste_3 {
     
     public static ArrayList<UserNormal> loadusers() throws FileNotFoundException, IOException, ClassNotFoundException{
         
+        try{
             String basePath = new File("users.dat").getAbsolutePath();
             ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
             ArrayList <UserNormal> users = (ArrayList) fi.readObject();
             fi.close();
             return users;
-
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
     
     
@@ -69,13 +74,19 @@ public class ClasseTeste_3 {
     
      
     public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        try{
             String basePath = new File("musicas.dat").getAbsolutePath();
             ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
             ArrayList <Musica> musicas = (ArrayList) fi.readObject();
             fi.close();
             return musicas;
-        
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
     
     public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
@@ -270,23 +281,7 @@ public class ClasseTeste_3 {
             
         }
     }
-    
-    
 
-    
-    
-    public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
-        sala.adicionar_user(sala,user);
-    }                       
-            
-    public static void remover_user_sala(Sala sala, UserNormal user) {      //  antes de chamar a função ver se o current user é admin
-        sala.remover_user(sala,user);
-    }
-    
-    public static void promover_user_sala(Sala sala, UserNormal user) {
-        sala.setAdmin(user);
-    }
-    
     public static String print_mensagens_sala(Sala sala) {                //print das ultimas 5 mensagens?
         String ss = "";
         int cont=0;
@@ -397,32 +392,28 @@ public class ClasseTeste_3 {
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         
-        ArrayList<UserNormal> users;
-        try{
-            users= new ArrayList<UserNormal>(20);
-            users = loadusers();
-            
-        }
-        catch(Exception e){
-            users = new ArrayList<>(20);
-        }
-        
-        ArrayList<Musica> playlist ;
-         try{
-            playlist= new ArrayList<Musica>(20);
-            playlist = loadmusicas();
-            
-        }
-        catch(Exception e){
-            playlist = new ArrayList<Musica>(20);
-        }
-
         ArrayList<Sala> salas = new ArrayList<>(5);
-        
-
-        
+        ArrayList<Musica> playlist = new ArrayList<>();
+        ArrayList<UserNormal> users = new ArrayList<>(20);
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
+        BibliotecaMusical bib = new BibliotecaMusical();
+        bib.setMusicas(playlist);
+        
+        Musica m1 = new Musica(3.123, "coco", "ranheta", "facada", "pasteis");
+        bib.adicionar_Musica(m1);
+        System.out.println(bib.toString());
+        
+        try{
+            users = loadusers();
+            playlist = loadmusicas();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Falha ao inicializar users, se for a primeira vez então tente criar um user e dar restart na aplicação");
+        }
+        
+        bib.toString();
+         
         suggested.add("Musicas Sugeridas : ");
         int j ; // usada para circular musicas
         
@@ -542,6 +533,10 @@ public class ClasseTeste_3 {
                      String pass = JOptionPane.showInputDialog(null,"Insira a password ");      // TODO -> meter a pssword com asteriscos 
                      
                      for(int i = 0;i < users.size();i++) {
+                         System.out.println(users.get(i).getNick());
+                         System.out.println(users.get(i).getPW());
+                         System.out.println(nickname);
+                         System.out.println(pass);
                          if((users.get(i).getNick().equals(nickname)) && (users.get(i).getPW().equals(pass))) {
                              verificacao = true;
                              JOptionPane.showMessageDialog(null, "Login com sucesso");
@@ -615,7 +610,7 @@ public class ClasseTeste_3 {
                 
                 switch(mLI2){
                           case 1:         //caso para entrar numa sala já existente
-                                Sala current_sala  = new Sala(new Guest("guest"));
+                                 Sala current_sala  = new Sala(new Guest("guest"));
                                String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
                               int n_salaaa = Integer.parseInt(n_salaa);
                               try{
@@ -668,8 +663,6 @@ public class ClasseTeste_3 {
                 
                 Musica m = new Musica(dur, titulo, autor, album, genero);
                 
-                
-                try{
                 if(playlist.isEmpty() == false) {
                     for(Musica musi: playlist) {
                     if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
@@ -682,12 +675,6 @@ public class ClasseTeste_3 {
                 }
                 }
                 else {
-                    playlist.add(m);
-                    JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
-                }
-                
-                }
-                catch(Exception e){
                     playlist.add(m);
                     JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
                 }
@@ -718,7 +705,7 @@ public class ClasseTeste_3 {
         }
         
         
-        }while(an > 0);     // repeticao do menu principal enquanto nao der exit
+        }while(an > 0 || an == -2);     // repeticao do menu principal enquanto nao der exit
         
         
     }//fim do main
