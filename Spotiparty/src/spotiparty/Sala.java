@@ -36,6 +36,14 @@ public class Sala {
         this.Musicas.add(new Musica());
     }
     
+    public Sala(Guest g){
+        this.NumeroDaSala = NumeroDaSala;
+        this.Mensagens.add("Escreva algo");
+        this.Musicas.add(new Musica());
+        Membros.add(new UserNormal());
+        Membros.get(0).setNome("guest");
+        
+    }
     
     
     public ArrayList<Musica> getMusicas() {
