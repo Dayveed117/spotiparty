@@ -13,28 +13,43 @@ import javax.swing.JOptionPane;
  */
 public class Sala {
     
-    private int NomeDaSala;
-    private ArrayList<UserNormal> Membros;
+    private int NumeroDaSala;
+    private ArrayList<UserNormal> Membros  = new ArrayList<UserNormal>();
     private AdminUser admin;
-    private ArrayList<Musica> Musicas;
-    private ArrayList<String> Mensagens;
+    private ArrayList<Musica> Musicas = new ArrayList<Musica>();
+    private ArrayList<String> Mensagens = new ArrayList<String>();
     
     
-    public Sala() {
+    
+    public Sala(int NumeroDaSala, UserNormal user ) {
+        this.NumeroDaSala = NumeroDaSala;
+        this.admin = new AdminUser(user,true);
+        this.Membros.add(user);
+        this.Mensagens.add("Escreva algo");
+        this.Musicas.add(new Musica());
     }
     
     public Sala(UserNormal user) {
-        
-        this.NomeDaSala = NomeDaSala;
-        this.Membros.add(new UserNormal());
-        this.admin = new AdminUser(user,true);
-        this.Mensagens.add("Escreva alguma coisa !!!");
+        this.NumeroDaSala = NumeroDaSala;
+        this.Mensagens.add("Escreva algo");
+        this.Membros.add(user);
         this.Musicas.add(new Musica());
     }
+    
+    public Sala(Guest g){
+        this.NumeroDaSala = NumeroDaSala;
+        this.Mensagens.add("Escreva algo");
+        this.Musicas.add(new Musica());
+        Membros.add(new UserNormal());
+        Membros.get(0).setNome("guest");
+        
+    }
+    
     
     public ArrayList<Musica> getMusicas() {
         return Musicas;
     }
+    
 
     public void setMusicas(ArrayList<Musica> Musicas) {
         this.Musicas = Musicas;
@@ -49,11 +64,11 @@ public class Sala {
     }
     
     public int getNomeDaSala() {
-        return NomeDaSala;
+        return NumeroDaSala;
     }
 
-    public void setNomeDaSala(int NomeDaSala) {
-        this.NomeDaSala = NomeDaSala;
+    public void setNomeDaSala(int NumeroDaSala) {
+        this.NumeroDaSala = NumeroDaSala;
     }
 
     public ArrayList<UserNormal> getMembros() {
@@ -68,46 +83,40 @@ public class Sala {
         return admin;
     }
 
-    public void setAdmin(AdminUser admin) {      //na main apenas o admin poder promover outro admin
-        this.admin = admin;
+    public void setAdmin(UserNormal admin) {      //na main apenas o admin poder promover outro admin
+        this.admin = new AdminUser(admin,true);
     }
     
     //para remover uma sala basta por a sala toda a null e fazer print de sucesso??
     
     //checkar na main se o current_user é admin para fazer estas operações
-    public void adicionar_user(UserNormal user) {
+    public void adicionar_user(Sala sala, UserNormal user) {
         if(Membros.contains(user)) {
             JOptionPane.showMessageDialog(null, "Utilizador já está na sala");
         }
         else {
             Membros.add(user);
-            JOptionPane.showMessageDialog(null, user.getNome()+" juntou-se à sala "+NomeDaSala);
+            JOptionPane.showMessageDialog(null, user.getNome()+" juntou-se à sala "+NumeroDaSala);
         }
     }
     
-    public void remover_user(UserNormal user) {
+    public void remover_user(Sala sala, User user) {
         if(Membros.contains(user)) {
             Membros.remove(user);
-            JOptionPane.showMessageDialog(null, user.getNome()+" removido da sala "+NomeDaSala);
+            JOptionPane.showMessageDialog(null, user.getNome()+" removido da sala "+NumeroDaSala);
         }
         else {
             JOptionPane.showMessageDialog(null, user.getNome()+" não encontrado");
         }
     }
     
-    public void promover(UserNormal user) {
-        if(Membros.contains(user)) {
-            user = (AdminUser)user;
-            JOptionPane.showInputDialog(null,  user.getNome()+"promovido a admin");
-        }
-        else {
-             JOptionPane.showInputDialog(null,"User not found");
-        }
-    }
+    public void print_mensagem(String s) {
+        System.out.println(s);
+    }    
      
     public Musica play_music(String titulo, String autor) {
         for(Musica m: Musicas) {
-            if((m.getTitulo().equals(titulo)) && (m.getAutor().equals(autor))) {
+            if((m.getTitulo() == titulo) && (m.getAutor() == autor)) {
                 return m;
             }
             break;
