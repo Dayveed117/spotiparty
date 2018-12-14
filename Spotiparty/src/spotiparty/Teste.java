@@ -58,7 +58,10 @@ public class Teste {
             j = Integer.parseInt(msg);
             if(j == 0 ){
              System.exit(0);
+             
               }
+            
+            
             if(j == 1){
                 //Adicionar membro a sala
                 String u= JOptionPane.showInputDialog(null,"Que user pretende adicionar á sala ? \n");
@@ -69,10 +72,12 @@ public class Teste {
                             Membros.add(userr);
                             JOptionPane.showMessageDialog(null,"User adicionado com sucesso");
                             criar_sala(sala,m,Membros,musicas,users);
-                            
+                            break;
                         }
                 }
                 }
+                JOptionPane.showMessageDialog(null,"User não existe..");
+                        criar_sala(sala,m,Membros,musicas,users);
                
             }
             
@@ -87,6 +92,7 @@ public class Teste {
                 criar_sala(sala,m,Membros,musicas,users);   
             }
             
+            //Mudar musica
             if(j == 4){
                 String music = JOptionPane.showInputDialog(null,"Que musica quer ouvir ? ");
                 musicas.get(0).setTitulo(music);
@@ -99,11 +105,14 @@ public class Teste {
         catch(Exception e){
             if(m.size() == 10){
                 JOptionPane.showMessageDialog(null,"Numero máximo de mensagens ! A limpar o chat....");
-                m = new ArrayList<String>();
-                criar_sala(sala,m,Membros,musicas,users);
+                m = new ArrayList<String>(10);
+                m.add("Escreva algo");
+            }
+            else{
+                m.add(msg);
             }
             
-            m.add(msg);
+
             criar_sala(sala,m,Membros,musicas,users);
             
         }
@@ -266,18 +275,26 @@ public class Teste {
         }
         
         else {
-        
+        int escolha= 0;
         String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " + " guest \n "
                + "1 - Entrar numa sala \n"
                + "2 - Exit ");
         
-               int escolha = Integer.parseInt(choice);
+               while(true){
+               try{
+               escolha = Integer.parseInt(choice);
+               break;
+               }
+               catch(Exception e){
+                   JOptionPane.showMessageDialog(null, "Insira uma escolha valida");
+               }
                
+               }
                while(escolha < 1 || escolha > 2) {
                    
                    choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " + " guest \n "
                + "1 - Entrar numa sala \n"
-               + "2 - Exit\nPick a number ");
+               + "2 - Exit\n");
                    
                    escolha = Integer.parseInt(choice);
                    
@@ -298,6 +315,7 @@ public class Teste {
         int j ; // usada para circular musicas
         boolean guest = false;
         int n_sala = 0;
+        int idade;
         
         
         int an = -2;
@@ -315,8 +333,18 @@ public class Teste {
                 
            String nome = JOptionPane.showInputDialog(null,"Insira o seu nome \n ");
            String nick = JOptionPane.showInputDialog(null,"Insira o seu nickname \n ");
+          
+           while(true){
+           try{
            String num = JOptionPane.showInputDialog(null,"Insira a sua idade \n ");
-           int idade = Integer.parseInt(num);
+            idade = Integer.parseInt(num);
+           break;
+           }
+           catch(Exception e){
+               JOptionPane.showMessageDialog(null, "A idade tem de ser um numero !!!");
+               
+           }
+           }
            String password = JOptionPane.showInputDialog(null,"Insira a sua password \n");
            
            UserNormal novo = new UserNormal(nome, nick, password, idade);
@@ -330,11 +358,24 @@ public class Teste {
 
                 switch (mLI1) {
                     
-                    case 1:         //caso para entrar numa sala já existente
-                          String s = JOptionPane.showInputDialog(null,"Qual o ID da sala que pretende entrar ? ");
-                           n_sala = Integer.parseInt(s);
-                           //Verificar se a sala existe
-                           break;
+                    case 1:         //caso para entrar numa sala ;já existente
+                              Sala current_sala = new Sala(current_user);
+                              String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
+                              int n_salaaa = Integer.parseInt(n_salaa);
+                              try{
+                               current_sala = salas.get(n_salaaa);
+                              }
+                              catch(Exception e){
+                                  JOptionPane.showMessageDialog(null, "Sala nao existe");
+                              }
+                              
+                              try{
+                              entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users);
+                              }
+                              catch(Exception e){
+                                  JOptionPane.showMessageDialog(null, "Erro ao entrar na sala");
+                              }
+                              break;
                         
                     case 2:         
                         //Criar sala
@@ -351,6 +392,9 @@ public class Teste {
                     case 3:         //caso para ver friendslist
                         JOptionPane.showMessageDialog( null,"Your friends : \n"
                             + current_user.listar_amigos());
+                        mLI1 = menu_loggedIn(current_user,guest);
+                        
+                        
                         break;
                         
                     case 4:         //caso para listar musicas
@@ -383,10 +427,12 @@ public class Teste {
                              current_user = new UserNormal(user);
                              break;
                          }
-                         else {
-                             JOptionPane.showMessageDialog(null,"Dados incorretos , tente outra vez.");
-                         }      
+               
+                         
                      }
+                             JOptionPane.showMessageDialog(null, "Dados Incorretos");
+                     
+                     
                      }while(verificacao == false);
                     
                     int mLI2 = menu_loggedIn(current_user, guest);
@@ -394,7 +440,10 @@ public class Teste {
                     switch (mLI2) {
                     
                           case 1:         //caso para entrar numa sala já existente
-                        
+                              String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
+                              int n_salaaa = Integer.parseInt(n_salaa);
+                              Sala current_sala = salas.get(n_salaaa);
+                              entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users);
                               break;
                         
                           case 2:         //caso para criar uma sala nova
