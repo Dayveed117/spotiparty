@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package SpotiParty;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,8 +24,10 @@ public class Teste {
     public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
         
           try{	
-		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("c:\\java_users\\users.dat"));
-									
+              
+              String basePath = new File("users.dat").getAbsolutePath();
+		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(basePath));
+                
                 os.writeObject(users);								
                 os.flush();
                 os.close();
@@ -38,7 +41,8 @@ public class Teste {
     public static ArrayList<UserNormal> loadusers() throws FileNotFoundException, IOException, ClassNotFoundException{
         
         try{
-            ObjectInputStream fi = new ObjectInputStream(new FileInputStream("c:\\java_users\\users.dat"));
+            String basePath = new File("users.dat").getAbsolutePath();
+            ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
             ArrayList users = (ArrayList) fi.readObject();
             fi.close();
@@ -54,7 +58,9 @@ public class Teste {
      public static void save_musicas(ArrayList<Musica> musicas) throws FileNotFoundException, IOException{
         
           try{	
-		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("c:\\java_users\\musicas.dat"));
+              
+                String basePath = new File("musicas.dat").getAbsolutePath();
+		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(basePath));
 									
                 os.writeObject(musicas);								
                 os.flush();
@@ -70,7 +76,8 @@ public class Teste {
     public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
         
         try{
-            ObjectInputStream fi = new ObjectInputStream(new FileInputStream("c:\\java_users\\musicas.dat"));
+            String basePath = new File("musicas.dat").getAbsolutePath();
+            ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
             ArrayList musicas = (ArrayList) fi.readObject();
             fi.close();
@@ -404,11 +411,20 @@ public class Teste {
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
 
         ArrayList<UserNormal> users = new ArrayList<>(20);
-        users = loadusers();
-        JOptionPane.showMessageDialog(null, users.get(0).getPW());
+        try{
+            users = loadusers();
+        }
+        catch(Exception e){
+            
+        }
         ArrayList<Sala> salas = new ArrayList<>(5);
         ArrayList<Musica> playlist = new ArrayList<>();
-        playlist = loadmusicas();
+        try{
+            playlist = loadmusicas();
+        }
+        catch(Exception e){
+            
+        }
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
         suggested.add("Musicas Sugeridas : ");

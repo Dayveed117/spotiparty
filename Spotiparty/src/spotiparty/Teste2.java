@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author a40284
  */
-public class Teste {
+public class Teste2 {
     
   
     public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
