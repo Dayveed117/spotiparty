@@ -514,7 +514,12 @@ public class Teste {
                         break;
                         
                     case 4:         //caso para listar musicas
+                        String s ="";
+                        for(int i = 0;i< playlist.size();i++){
+                            s = s + playlist.get(i).getTitulo() + "\n";
+                        }
                         
+                        JOptionPane.showMessageDialog(null,s);
                         break;
                         
                     case 5:         //caso para sair da aplicação
@@ -592,7 +597,12 @@ public class Teste {
                               break;
                         
                           case 4:         //caso para listar musicas
+                                  String s ="";
+                        for(int i = 0;i< playlist.size();i++){
+                            s = s + playlist.get(i).getTitulo() + "\n";
+                        }
                         
+                        JOptionPane.showMessageDialog(null, s);
                               break;
                         
                            case 5:         //caso para sair da aplicação
@@ -634,7 +644,7 @@ public class Teste {
                                 if(and == 0){
                                     save(users);
                                     save_musicas(playlist);
-                                   System.exit(0);
+                                    System.exit(0);
                                 break;
 
                                  }
