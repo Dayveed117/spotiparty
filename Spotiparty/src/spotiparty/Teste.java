@@ -19,8 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Teste {
     
-    
-    
+  
     public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
         
           try{	
@@ -48,6 +47,39 @@ public class Teste {
         catch(IOException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+        return null;
+    }
+    
+    
+     public static void save_musicas(ArrayList<Musica> musicas) throws FileNotFoundException, IOException{
+        
+          try{	
+		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("c:\\java_users\\musicas.dat"));
+									
+                os.writeObject(musicas);								
+                os.flush();
+                os.close();
+	}
+          
+          	catch(IOException e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+	}
+    }
+    
+     
+    public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        try{
+            ObjectInputStream fi = new ObjectInputStream(new FileInputStream("c:\\java_users\\musicas.dat"));
+            
+            ArrayList musicas = (ArrayList) fi.readObject();
+            fi.close();
+            return musicas;
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
         return null;
     }
     
@@ -249,7 +281,7 @@ public class Teste {
 
     
     
-        public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
+    public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
         sala.adicionar_user(sala,user);
     }                       
             
@@ -372,6 +404,7 @@ public class Teste {
         JOptionPane.showMessageDialog(null, users.get(0).getPW());
         ArrayList<Sala> salas = new ArrayList<>(5);
         ArrayList<Musica> playlist = new ArrayList<>();
+        playlist = loadmusicas();
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
         suggested.add("Musicas Sugeridas : ");
@@ -469,6 +502,7 @@ public class Teste {
                         int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                         if(and == 0){
                            save(users);
+                           save_musicas(playlist);
                            System.exit(0);
            }
                         break;
@@ -580,6 +614,8 @@ public class Teste {
 
                                 int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                                 if(and == 0){
+                                    save(users);
+                                    save_musicas(playlist);
                                    System.exit(0);
                                 break;
 
@@ -596,6 +632,8 @@ public class Teste {
                 an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                 System.out.println(an);
                 if(an < 0){
+                      save(users);
+                      save_musicas(playlist);
                       System.exit(0);
                 }
                 
