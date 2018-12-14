@@ -114,7 +114,7 @@ public class UserNormal extends User{
         
       public String listar_amigos(){
         
-        String s = "";
+        String s = " ";
         
         for(int i = 0;i < amigos.size();i++){
             s = s + amigos.get(i).getNome();
@@ -122,6 +122,7 @@ public class UserNormal extends User{
         return s;
     }
      
+      @Override
       public String toString(){
         return ("Nome: " + nome + "\n Nickname: " + Nickname + "\n Idade: " + Idade);
     }  

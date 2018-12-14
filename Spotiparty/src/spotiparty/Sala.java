@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class Sala {
     
-    private String NomeDaSala;
+    private int NomeDaSala;
     private ArrayList<UserNormal> Membros;
     private AdminUser admin;
     private ArrayList<Musica> Musicas;
@@ -23,14 +23,14 @@ public class Sala {
     public Sala() {
     }
     
-    public Sala(String NomeDaSala, UserNormal user) {
+    public Sala(int NomeDaSala, UserNormal user) {
+        
         this.NomeDaSala = NomeDaSala;
         this.Membros.add(new UserNormal());
         this.admin = new AdminUser(user,true);
         this.Mensagens.add("Escreva alguma coisa !!!");
         this.Musicas.add(new Musica());
     }
-
     
     public ArrayList<Musica> getMusicas() {
         return Musicas;
@@ -48,11 +48,11 @@ public class Sala {
         this.Mensagens = Mensagens;
     }
     
-    public String getNomeDaSala() {
+    public int getNomeDaSala() {
         return NomeDaSala;
     }
 
-    public void setNomeDaSala(String NomeDaSala) {
+    public void setNomeDaSala(int NomeDaSala) {
         this.NomeDaSala = NomeDaSala;
     }
 

@@ -237,8 +237,9 @@ public class main{
                    //Criar sala
                   String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                     + "Digite o nome da sala \n");
+                    int NS = Integer.parseInt(nome_sala);
                   JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                  Sala nova_sala = new Sala(nome_sala, current_user);
+                  Sala nova_sala = new Sala(NS, current_user);
                   criar_sala(nova_sala, nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),0);
                }
           }

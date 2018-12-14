@@ -262,7 +262,7 @@ public class mainExceptions extends Exception{
                   String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                     + "Digite o nome da sala \n");
                   JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                  SpotiParty.Sala nova_sala = new SpotiParty.Sala(nome_sala,current_user);
+                  SpotiParty.Sala nova_sala = new Sala(nome_sala,current_user);
                   criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),0);
                }
           }

@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package spotiparty;
-
+package SpotiParty;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -13,7 +12,8 @@ import javax.swing.JOptionPane;
  * @author a40284
  */
 public class ClasseTeste_2 {
-        public static boolean is_in_list(String nome,ArrayList<SpotiParty.UserNormal> lista){
+        
+        public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
         boolean encontrou = false;
         for(int i = 0;i < lista.size() ; i++){
             if(lista.get(i).getNome() == nome){
@@ -25,7 +25,7 @@ public class ClasseTeste_2 {
     }
     
     
-    public static void criar_sala(SpotiParty.Sala sala , ArrayList<String> m,ArrayList<SpotiParty.UserNormal> Membros,ArrayList<SpotiParty.Musica> musicas,ArrayList<SpotiParty.UserNormal> users){
+    public static void criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,ArrayList<UserNormal> users){
         String s="";
         String msg="v";
         int mc =0;
@@ -40,7 +40,8 @@ public class ClasseTeste_2 {
             }
             
             else{
-            s =  s + m.get(i)   + "                                   \n ";}
+            s =  s + m.get(i)   + "                                   \n ";
+            }
         }
         
        
@@ -50,6 +51,7 @@ public class ClasseTeste_2 {
                  + "                                                                                        0 - Exit \n"
                  + "                                                                                        1 - Adicionar user á sala \n "
                  + "                                                                                        2 - Ver os users nesta sala \n "
+                 + "                                                                                        3 - Ver os users nesta sala \n "
                  + "                                                                                        4 - Mudar Musica \n");
          
          
@@ -103,7 +105,7 @@ public class ClasseTeste_2 {
             }
             
             m.add(msg);
-            criar_sala(sala,m,Membros,musicas,users);       //supostamente sim
+            criar_sala(sala,m,Membros,musicas,users); 
             
         }
         
@@ -118,7 +120,7 @@ public class ClasseTeste_2 {
     
     
     
-    public static void entrar_sala(SpotiParty.Sala sala , ArrayList<String> m,ArrayList<SpotiParty.UserNormal> Membros,ArrayList<SpotiParty.Musica> musicas,ArrayList<SpotiParty.UserNormal> users){
+    public static void entrar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,ArrayList<UserNormal> users){
         String s="";
         String msg="v";
         int mc =0;
@@ -188,19 +190,19 @@ public class ClasseTeste_2 {
 
     
     
-        public static void adicionar_user_sala(SpotiParty.Sala sala, SpotiParty.UserNormal user) {            // antes de chamar a função ver se o current user é admin
-        sala.adicionar_user(sala,user);
+        public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
+        sala.adicionar_user(user);
     }                       
             
-    public static void remover_user_sala(SpotiParty.Sala sala, SpotiParty.UserNormal user) {      //  antes de chamar a função ver se o current user é admin
-        sala.remover_user(sala,user);
+    public static void remover_user_sala(Sala sala, UserNormal user) {      //  antes de chamar a função ver se o current user é admin
+        sala.remover_user(user);
     }
     
-    public static void promover_user_sala(SpotiParty.Sala sala, SpotiParty.UserNormal user) {
+    public static void promover_user_sala(Sala sala, AdminUser user) {
         sala.setAdmin(user);
     }
     
-    public static String print_mensagens_sala(SpotiParty.Sala sala) {                //print das ultimas 5 mensagens?
+    public static String print_mensagens_sala(Sala sala) {                //print das ultimas 5 mensagens?
         String ss = "";
         int cont=0;
         
@@ -318,7 +320,7 @@ public class ClasseTeste_2 {
            int idade = Integer.parseInt(num);
            String password = JOptionPane.showInputDialog(null,"Insira a sua password \n");
            
-           SpotiParty.UserNormal novo = new SpotiParty.UserNormal(nome, nick, password, idade);
+           UserNormal novo = new UserNormal(nome, nick, password, idade);
            users.add(novo);
            current_user = novo.clone();
 
@@ -342,7 +344,7 @@ public class ClasseTeste_2 {
 
                             int ms = Integer.parseInt(nome_sala);
                             JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                            SpotiParty.Sala nova_sala = new SpotiParty.Sala(ms,current_user);
+                            Sala nova_sala = new Sala(ms,current_user);
                             criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),users);
                          
                         break;
@@ -402,7 +404,7 @@ public class ClasseTeste_2 {
 
                             int ms = Integer.parseInt(nome_sala);
                             JOptionPane.showMessageDialog(null,"Sala criada com sucesso !");
-                            SpotiParty.Sala nova_sala = new SpotiParty.Sala(ms,current_user);
+                            Sala nova_sala = new Sala(ms,current_user);
                             criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),users);
                               break;
                         
