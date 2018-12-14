@@ -13,14 +13,13 @@ import java.util.Objects;
  */
 public class Musica {
     
-    private double duracao, rating;
+    private double duracao;
     private String titulo, autor, genero, album;
     
     
     
-    public Musica(double duracao, double rating, String titulo, String autor, String album, String genero) {
+    public Musica(double duracao, String titulo, String autor, String album, String genero) {
         this.duracao = duracao;
-        this.rating = rating;              //tem que ser um double de 0 a 5 especificado no main
         this.titulo = titulo;
         this.autor = autor;
         this.album = album;
@@ -30,20 +29,11 @@ public class Musica {
     
     public Musica(){
          this.duracao = 0;
-        this.rating = 0;              //tem que ser um double de 0 a 5 especificado no main
         this.titulo = "";
         this.autor = "";
         this.album = "";
         this.genero = "";
         
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
     }
 
     public String getAlbum() {
@@ -91,7 +81,7 @@ public class Musica {
         if(obj != null && this.getClass() == obj.getClass()) {
             Musica temp = (Musica)obj;
             return ((album.equals(temp.getAlbum())) && (autor.equals(temp.getAutor())) && (this.getDuracao() == temp.getDuracao())
-                    && genero.equals(temp.genero) && this.getRating() == temp.getRating() && titulo.equals(temp.getTitulo()));
+                    && genero.equals(temp.genero) && titulo.equals(temp.getTitulo()));
         }
         return false;
     }
@@ -109,8 +99,7 @@ public class Musica {
     @Override
     public String toString() {
         return("\nTitulo: "+titulo+"\nArtista: "+autor+"; Album: "+album+
-                "; Genero: " +genero+"\nDuração: "+duracao+"Rating: "+rating+"\n");
+                "; Genero: " +genero+"\nDuração: "+duracao+"\n");
     }
-    
     
 }

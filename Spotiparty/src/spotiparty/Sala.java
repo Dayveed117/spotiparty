@@ -23,7 +23,7 @@ public class Sala {
     public Sala() {
     }
     
-    public Sala(int NomeDaSala, UserNormal user) {
+    public Sala(UserNormal user) {
         
         this.NomeDaSala = NomeDaSala;
         this.Membros.add(new UserNormal());
