@@ -17,9 +17,24 @@ import javax.swing.JOptionPane;
  *
  * @author a40284
  */
-public class Teste {
+public class adddoCJ {
     
-  
+    public static ArrayList<Musica> loadplaylist() throws FileNotFoundException, IOException, ClassNotFoundException {
+        
+        try{
+            ObjectInputStream fi = new ObjectInputStream(new FileInputStream("c:\\java_users\\musicas.dat"));
+            
+            ArrayList playlist = (ArrayList) fi.readObject();
+            fi.close();
+            return playlist;
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
+    
+    }
+    
     public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
         
           try{	
@@ -35,6 +50,8 @@ public class Teste {
 	}
     }
     
+    
+    
     public static ArrayList<UserNormal> loadusers() throws FileNotFoundException, IOException, ClassNotFoundException{
         
         try{
@@ -47,39 +64,6 @@ public class Teste {
         catch(IOException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        return null;
-    }
-    
-    
-     public static void save_musicas(ArrayList<Musica> musicas) throws FileNotFoundException, IOException{
-        
-          try{	
-		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("c:\\java_users\\musicas.dat"));
-									
-                os.writeObject(musicas);								
-                os.flush();
-                os.close();
-	}
-          
-          	catch(IOException e){
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-	}
-    }
-    
-     
-    public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
-        
-        try{
-            ObjectInputStream fi = new ObjectInputStream(new FileInputStream("c:\\java_users\\musicas.dat"));
-            
-            ArrayList musicas = (ArrayList) fi.readObject();
-            fi.close();
-            return musicas;
-        }
-        catch(IOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        
         return null;
     }
     
@@ -281,7 +265,7 @@ public class Teste {
 
     
     
-    public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
+        public static void adicionar_user_sala(Sala sala, UserNormal user) {            // antes de chamar a função ver se o current user é admin
         sala.adicionar_user(sala,user);
     }                       
             
@@ -404,11 +388,14 @@ public class Teste {
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
 
         ArrayList<UserNormal> users = new ArrayList<>(20);
-        users = loadusers();
+        users = loadusers();                            //fazer load dos users
+        
         JOptionPane.showMessageDialog(null, users.get(0).getPW());
         ArrayList<Sala> salas = new ArrayList<>(5);
+        
         ArrayList<Musica> playlist = new ArrayList<>();
-        playlist = loadmusicas();
+        playlist = loadplaylist();
+        
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
         suggested.add("Musicas Sugeridas : ");
@@ -506,7 +493,6 @@ public class Teste {
                         int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                         if(and == 0){
                            save(users);
-                           save_musicas(playlist);
                            System.exit(0);
            }
                         break;
@@ -601,16 +587,16 @@ public class Teste {
                 
                 switch(mLI2){
                           case 1:         //caso para entrar numa sala já existente
-                                 Sala current_sala  = new Sala(new Guest("guest"));
+                               Sala current_sala  = new Sala(new Guest("guest"));
                                String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
-                              int n_salaaa = Integer.parseInt(n_salaa);
-                              try{
-                              current_sala = salas.get(n_salaaa);
-                              }
-                              catch(Exception e){
-                              entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
-                              }
-                              break;
+                               int n_salaaa = Integer.parseInt(n_salaa);
+                               try{
+                               current_sala = salas.get(n_salaaa);
+                               }
+                               catch(Exception e){
+                               entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
+                               }
+                               break;
 
                         
 
@@ -618,8 +604,6 @@ public class Teste {
 
                                 int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                                 if(and == 0){
-                                    save(users);
-                                    save_musicas(playlist);
                                    System.exit(0);
                                 break;
 
@@ -629,21 +613,7 @@ public class Teste {
                 
                 break;
                 
-       
-                
-            case 6:         //caso para sair da aplicação
-                
-                an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
-                System.out.println(an);
-                if(an < 0){
-                      save(users);
-                      save_musicas(playlist);
-                      System.exit(0);
-                }
-                
-                break;
-                
-                 case 4:         //caso para adicionar uma musica ao vetor playlist
+            case 4:         //caso para adicionar uma musica ao vetor playlist
                 
                 String titulo = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
                 String autor = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
@@ -678,6 +648,15 @@ public class Teste {
                 break;
                 
                 
+            case 6:         //caso para sair da aplicação
+                
+                an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
+                System.out.println(an);
+                if(an < 0){
+                      System.exit(0);
+                }
+                
+                break;
         }
         
         
