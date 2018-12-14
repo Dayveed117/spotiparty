@@ -19,7 +19,21 @@ import javax.swing.JOptionPane;
  */
 public class Teste {
     
+    public static ArrayList<Musica> loadplaylist() throws FileNotFoundException, IOException, ClassNotFoundException {
+        
+        try{
+            ObjectInputStream fi = new ObjectInputStream(new FileInputStream("c:\\java_users\\musicas.dat"));
+            
+            ArrayList playlist = (ArrayList) fi.readObject();
+            fi.close();
+            return playlist;
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     
+    }
     
     public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
         
@@ -35,6 +49,8 @@ public class Teste {
                     JOptionPane.showMessageDialog(null, e.getMessage());
 	}
     }
+    
+    
     
     public static ArrayList<UserNormal> loadusers() throws FileNotFoundException, IOException, ClassNotFoundException{
         
@@ -282,7 +298,9 @@ public class Teste {
                + "1 - Registar \n"
                + "2 - Já tenho uma conta \n"
                + "3 - Entrar como guest  \n"
-               + "4 - Sair ");
+               + "4 - Adicionar Música  \n"
+               + "5 - Remover Música  \n"
+               + "6 - Sair ");
                 
                int escolha = Integer.parseInt(choice);
                while(escolha < 1 || escolha > 4) {
@@ -291,7 +309,9 @@ public class Teste {
                    + "1 - Registar \n"
                    + "2 - Já tenho uma conta \n"
                    + "3 - Entrar como guest  \n"
-                   + "4 - Sair \nUm número no menu ");
+                   + "4 - Adicionar Música  \n"
+                   + "5 - Remover Música  \n"
+                   + "6 - Sair ");
                    
                     escolha = Integer.parseInt(choice);
                     
@@ -368,10 +388,14 @@ public class Teste {
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
 
         ArrayList<UserNormal> users = new ArrayList<>(20);
-        users = loadusers();
+        users = loadusers();                            //fazer load dos users
+        
         JOptionPane.showMessageDialog(null, users.get(0).getPW());
         ArrayList<Sala> salas = new ArrayList<>(5);
+        
         ArrayList<Musica> playlist = new ArrayList<>();
+        playlist = loadplaylist();
+        
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
         suggested.add("Musicas Sugeridas : ");
@@ -563,16 +587,16 @@ public class Teste {
                 
                 switch(mLI2){
                           case 1:         //caso para entrar numa sala já existente
-                                 Sala current_sala  = new Sala(new Guest("guest"));
+                               Sala current_sala  = new Sala(new Guest("guest"));
                                String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
-                              int n_salaaa = Integer.parseInt(n_salaa);
-                              try{
-                              current_sala = salas.get(n_salaaa);
-                              }
-                              catch(Exception e){
-                              entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
-                              }
-                              break;
+                               int n_salaaa = Integer.parseInt(n_salaa);
+                               try{
+                               current_sala = salas.get(n_salaaa);
+                               }
+                               catch(Exception e){
+                               entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
+                               }
+                               break;
 
                         
 
@@ -589,9 +613,42 @@ public class Teste {
                 
                 break;
                 
-       
+            case 4:         //caso para adicionar uma musica ao vetor playlist
                 
-            case 4:         //caso para sair da aplicação
+                String titulo = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
+                String autor = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
+                String album = JOptionPane.showInputDialog(null,"De que album é essa música?");
+                String genero = JOptionPane.showInputDialog(null,"De que género é essa música?");
+                String duracao = JOptionPane.showInputDialog(null,"Que duração vai ter a musica?");
+                double dur = Double.parseDouble(duracao);
+                
+                for(Musica musi: playlist) {
+                    if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
+                        JOptionPane.showMessageDialog(null, "Musica já registada");
+                    }
+                }
+                Musica m = new Musica(dur, titulo, autor, album, genero);
+                playlist.add(m);
+                
+                break;
+                
+            case 5:         //caso para remover uma musica ao vetor playlist
+              
+                String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
+                String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
+                for(Musica mus: playlist) {
+                    if(tit.equals(mus.getTitulo()) && aut.equals(mus.getAutor())) {
+                        playlist.remove(mus);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Musica nao encontrada nos registos");
+                    }
+                }
+                
+                break;
+                
+                
+            case 6:         //caso para sair da aplicação
                 
                 an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                 System.out.println(an);
