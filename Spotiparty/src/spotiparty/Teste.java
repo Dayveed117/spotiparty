@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package SpotiParty;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -12,6 +18,38 @@ import javax.swing.JOptionPane;
  * @author a40284
  */
 public class Teste {
+    
+    
+    
+    public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
+        
+          try{	
+		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("c:\\java_users\\users.dat"));
+									
+                os.writeObject(users);								
+                os.flush();
+                os.close();
+	}
+          
+          	catch(IOException	e){
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+	}
+    }
+    
+    public static ArrayList<UserNormal> loadusers() throws FileNotFoundException, IOException, ClassNotFoundException{
+        
+        try{
+            ObjectInputStream fi = new ObjectInputStream(new FileInputStream("c:\\java_users\\users.dat"));
+            
+            ArrayList users = (ArrayList) fi.readObject();
+            fi.close();
+            return users;
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
+    }
     
     
     public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
@@ -65,6 +103,7 @@ public class Teste {
         try{
             j = Integer.parseInt(msg);
             if(j == 0 ){
+             save(users);
              System.exit(0);
              
               }
@@ -169,6 +208,7 @@ public class Teste {
         try{
             j = Integer.parseInt(msg);
             if(j == 0 ){
+                save(users);
              System.exit(0);
               }
           
@@ -325,9 +365,11 @@ public class Teste {
     
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
 
         ArrayList<UserNormal> users = new ArrayList<>(20);
+        users = loadusers();
+        JOptionPane.showMessageDialog(null, users.get(0).getPW());
         ArrayList<Sala> salas = new ArrayList<>(5);
         ArrayList<Musica> playlist = new ArrayList<>();
         UserNormal current_user = new UserNormal();
@@ -426,6 +468,7 @@ public class Teste {
                     case 5:         //caso para sair da aplicação
                         int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                         if(and == 0){
+                           save(users);
                            System.exit(0);
            }
                         break;
@@ -443,16 +486,23 @@ public class Teste {
                      String nickname = JOptionPane.showInputDialog(null,"Insira o seu nickname ");
                      String pass = JOptionPane.showInputDialog(null,"Insira a password ");      // TODO -> meter a pssword com asteriscos 
                      
-                     for(UserNormal user: users) {
-                         if(user.getNick().equals(nickname) && user.getPW().equals(pass)) {
+                     for(int i = 0;i < users.size();i++) {
+                         System.out.println(users.get(i).getNick());
+                         System.out.println(users.get(i).getPW());
+                         System.out.println(nickname);
+                         System.out.println(pass);
+                         if((users.get(i).getNick().equals(nickname)) && (users.get(i).getPW().equals(pass))) {
                              verificacao = true;
-                             current_user = new UserNormal(user);
+                             JOptionPane.showMessageDialog(null, "Login com sucesso");
+                             current_user = new UserNormal(users.get(i));
                              break;
                          }
                
                          
                      }
-                             JOptionPane.showMessageDialog(null, "Dados Incorretos");
+                      if(verificacao == false){
+                          JOptionPane.showMessageDialog(null, "Dados Incorretos");
+                      }
                      
                      
                      }while(verificacao == false);
@@ -462,9 +512,15 @@ public class Teste {
                     switch (mLI2) {
                     
                           case 1:         //caso para entrar numa sala já existente
+                               Sala current_sala = new Sala(current_user);
                               String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
                               int n_salaaa = Integer.parseInt(n_salaa);
-                              Sala current_sala = salas.get(n_salaaa);
+                              try{
+                              current_sala = salas.get(n_salaaa);
+                              }
+                              catch(Exception e){
+                                  
+                              }
                               entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
                               break;
                         
@@ -491,6 +547,7 @@ public class Teste {
                         
                         int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                         if(and == 0){
+                            save(users);
                            System.exit(0);
                               break;
                         

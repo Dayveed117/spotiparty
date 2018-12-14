@@ -5,13 +5,14 @@
  */
 package SpotiParty;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author a40284
  */
-public class Musica {
+public class Musica implements Serializable{
     
     private double duracao, rating;
     private String titulo, autor, genero, album;

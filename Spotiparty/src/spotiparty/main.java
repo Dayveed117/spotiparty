@@ -77,7 +77,6 @@ public class main{
        ArrayList<UserNormal> users = new ArrayList<UserNormal>(20);
        ArrayList<Sala> salas = new ArrayList<Sala>(5);
        ArrayList<Musica> playlist = new ArrayList<Musica>();
-       int j ; // Controla as musicas
 
 
        //Variaveis unicas

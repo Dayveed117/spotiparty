@@ -5,6 +5,7 @@
  */
 package SpotiParty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -12,7 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author Utilizador
  */
-public class UserNormal extends User{
+public class UserNormal extends User implements Serializable{
     
     private static  int ID = 1;
     private int Idade;
