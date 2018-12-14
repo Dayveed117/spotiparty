@@ -319,7 +319,7 @@ public class Teste {
                + "6 - Sair ");
                 
                int escolha = Integer.parseInt(choice);
-               while(escolha < 1 || escolha > 4) {
+               while(escolha < 1 || escolha > 6) {
                    
                    choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty! Log in, sign up, ou entra como um guest! \n" 
                    + "1 - Registar \n"
