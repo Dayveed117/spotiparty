@@ -44,7 +44,7 @@ public class Teste {
             String basePath = new File("users.dat").getAbsolutePath();
             ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
-            ArrayList users = (ArrayList) fi.readObject();
+            ArrayList <UserNormal> users = (ArrayList) fi.readObject();
             fi.close();
             return users;
         }
@@ -74,33 +74,20 @@ public class Teste {
     
      
     public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
-        /*try{
-            String basePath = new File("users.dat").getAbsolutePath();
-            ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
-            
-            ArrayList users = (ArrayList) fi.readObject();
-            fi.close();
-            return users;
-        }
-        catch(IOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        */
+        
         try{
             String basePath = new File("musicas.dat").getAbsolutePath();
             ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
-            ArrayList musicas = (ArrayList) fi.readObject();
+            ArrayList <Musica> musicas = (ArrayList) fi.readObject();
             fi.close();
             return musicas;
         }
         catch(IOException e){
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-        
         return null;
     }
-    
     
     public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
         boolean encontrou = false;
@@ -426,18 +413,23 @@ public class Teste {
         ArrayList<Sala> salas = new ArrayList<>(5);
         ArrayList<Musica> playlist = new ArrayList<>();
         
+        System.out.println(users.isEmpty()+" "+playlist.isEmpty());
+        
         try{
-            users = loadusers();
             playlist = loadmusicas();
+            users = loadusers();
         }
-        catch(Exception e){
+        catch(IOException | ClassNotFoundException e){
             
         }
+        users.isEmpty();
+        playlist.isEmpty();
         
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
         suggested.add("Musicas Sugeridas : ");
         int j ; // usada para circular musicas
+        
         boolean guest = false;
         int n_sala = 0;
         int idade;
