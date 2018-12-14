@@ -314,16 +314,20 @@ public class Teste {
                + "1 - Registar \n"
                + "2 - Já tenho uma conta \n"
                + "3 - Entrar como guest  \n"
-               + "4 - Sair ");
+               + "4 - Adicionar Música  \n"
+               + "5 - Remover Música  \n"
+               + "6 - Sair ");
                 
                int escolha = Integer.parseInt(choice);
-               while(escolha < 1 || escolha > 4) {
+               while(escolha < 1 || escolha > 6) {
                    
                    choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty! Log in, sign up, ou entra como um guest! \n" 
                    + "1 - Registar \n"
                    + "2 - Já tenho uma conta \n"
                    + "3 - Entrar como guest  \n"
-                   + "4 - Sair \nUm número no menu ");
+                   + "4 - Adicionar Música  \n"
+                   + "5 - Remover Música  \n"
+                   + "6 - Sair ");
                    
                     escolha = Integer.parseInt(choice);
                     
@@ -627,7 +631,7 @@ public class Teste {
                 
        
                 
-            case 4:         //caso para sair da aplicação
+            case 6:         //caso para sair da aplicação
                 
                 an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                 System.out.println(an);
@@ -638,6 +642,42 @@ public class Teste {
                 }
                 
                 break;
+                
+                 case 4:         //caso para adicionar uma musica ao vetor playlist
+                
+                String titulo = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
+                String autor = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
+                String album = JOptionPane.showInputDialog(null,"De que album é essa música?");
+                String genero = JOptionPane.showInputDialog(null,"De que género é essa música?");
+                String duracao = JOptionPane.showInputDialog(null,"Que duração vai ter a musica?");
+                double dur = Double.parseDouble(duracao);
+                
+                for(Musica musi: playlist) {
+                    if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
+                        JOptionPane.showMessageDialog(null, "Musica já registada");
+                    }
+                }
+                Musica m = new Musica(dur, titulo, autor, album, genero);
+                playlist.add(m);
+                
+                break;
+                
+            case 5:         //caso para remover uma musica ao vetor playlist
+              
+                String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
+                String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
+                for(Musica mus: playlist) {
+                    if(tit.equals(mus.getTitulo()) && aut.equals(mus.getAutor())) {
+                        playlist.remove(mus);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null,"Musica nao encontrada nos registos");
+                    }
+                }
+                
+                break;
+                
+                
         }
         
         
