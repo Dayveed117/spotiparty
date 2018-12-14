@@ -410,20 +410,23 @@ public class Teste {
         
         
         ArrayList<UserNormal> users = new ArrayList<>(20);
+        try{
+            users = loadusers();
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Falha ao inicializar users, se for a primeira vez então tente criar um user e dar restart na aplicação");
+        }
         ArrayList<Sala> salas = new ArrayList<>(5);
         ArrayList<Musica> playlist = new ArrayList<>();
         
-        System.out.println(users.isEmpty()+" "+playlist.isEmpty());
         
         try{
             playlist = loadmusicas();
-            users = loadusers();
+            
         }
         catch(IOException | ClassNotFoundException e){
             
         }
-        users.isEmpty();
-        playlist.isEmpty();
         
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
