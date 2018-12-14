@@ -74,7 +74,18 @@ public class Teste {
     
      
     public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
-        
+        /*try{
+            String basePath = new File("users.dat").getAbsolutePath();
+            ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
+            
+            ArrayList users = (ArrayList) fi.readObject();
+            fi.close();
+            return users;
+        }
+        catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        */
         try{
             String basePath = new File("musicas.dat").getAbsolutePath();
             ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
@@ -409,22 +420,20 @@ public class Teste {
     
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
-
+        
+        
         ArrayList<UserNormal> users = new ArrayList<>(20);
-        try{
-            users = loadusers();
-        }
-        catch(Exception e){
-            
-        }
         ArrayList<Sala> salas = new ArrayList<>(5);
         ArrayList<Musica> playlist = new ArrayList<>();
+        
         try{
+            users = loadusers();
             playlist = loadmusicas();
         }
         catch(Exception e){
             
         }
+        
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
         suggested.add("Musicas Sugeridas : ");
@@ -492,6 +501,7 @@ public class Teste {
                               catch(Exception e){
                                   JOptionPane.showMessageDialog(null, "Erro ao entrar na sala");
                               }
+                              
                               break;
                         
                     case 2:         
@@ -507,9 +517,10 @@ public class Teste {
                         break;
                         
                     case 3:         //caso para ver friendslist
-                        JOptionPane.showMessageDialog( null,"Your friends : \n"
+                        
+                            JOptionPane.showMessageDialog( null,"Your friends : \n"
                             + current_user.listar_amigos());
-                        mLI1 = menu_loggedIn(current_user,guest);
+                            mLI1 = menu_loggedIn(current_user, guest);
                         
                         
                         break;
@@ -524,8 +535,10 @@ public class Teste {
                            save(users);
                            save_musicas(playlist);
                            System.exit(0);
-           }
+                        }
+                        
                         break;
+                        
                 }
         
             case 2:      
@@ -566,7 +579,8 @@ public class Teste {
                     switch (mLI2) {
                     
                           case 1:         //caso para entrar numa sala já existente
-                               Sala current_sala = new Sala(current_user);
+                              
+                              Sala current_sala = new Sala(current_user);
                               String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
                               int n_salaaa = Integer.parseInt(n_salaa);
                               try{
@@ -668,13 +682,23 @@ public class Teste {
                 String duracao = JOptionPane.showInputDialog(null,"Que duração vai ter a musica?");
                 double dur = Double.parseDouble(duracao);
                 
-                for(Musica musi: playlist) {
+                Musica m = new Musica(dur, titulo, autor, album, genero);
+                
+                if(playlist.isEmpty() == false) {
+                    for(Musica musi: playlist) {
                     if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
                         JOptionPane.showMessageDialog(null, "Musica já registada");
                     }
+                    else {
+                        playlist.add(m);
+                        JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
+                    }
                 }
-                Musica m = new Musica(dur, titulo, autor, album, genero);
-                playlist.add(m);
+                }
+                else {
+                    playlist.add(m);
+                    JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
+                }
                 
                 break;
                 
@@ -682,6 +706,11 @@ public class Teste {
               
                 String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
                 String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
+                
+                if(playlist.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Não há músicas a remover.");
+                }
+                
                 for(Musica mus: playlist) {
                     if(tit.equals(mus.getTitulo()) && aut.equals(mus.getAutor())) {
                         playlist.remove(mus);
