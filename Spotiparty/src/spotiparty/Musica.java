@@ -8,10 +8,6 @@ package SpotiParty;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- *
- * @author a40284
- */
 public class Musica implements Serializable{
     
     private double duracao;
@@ -29,7 +25,7 @@ public class Musica implements Serializable{
     }
     
     public Musica(){
-         this.duracao = 0;
+        this.duracao = 0;
         this.titulo = "";
         this.autor = "";
         this.album = "";

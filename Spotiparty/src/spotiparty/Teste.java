@@ -25,7 +25,7 @@ public class Teste {
         
           try{	
               
-              String basePath = new File("users.dat").getAbsolutePath();
+                String basePath = new File("users.dat").getAbsolutePath();
 		ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(basePath));
                 
                 os.writeObject(users);								
@@ -40,18 +40,13 @@ public class Teste {
     
     public static ArrayList<UserNormal> loadusers() throws FileNotFoundException, IOException, ClassNotFoundException{
         
-        try{
             String basePath = new File("users.dat").getAbsolutePath();
             ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
             ArrayList <UserNormal> users = (ArrayList) fi.readObject();
             fi.close();
             return users;
-        }
-        catch(IOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        return null;
+
     }
     
     
@@ -74,19 +69,13 @@ public class Teste {
     
      
     public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
-        
-        try{
             String basePath = new File("musicas.dat").getAbsolutePath();
             ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
             
             ArrayList <Musica> musicas = (ArrayList) fi.readObject();
             fi.close();
             return musicas;
-        }
-        catch(IOException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        return null;
+        
     }
     
     public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
@@ -408,25 +397,29 @@ public class Teste {
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         
-        
-        ArrayList<UserNormal> users = new ArrayList<>(20);
+        ArrayList<UserNormal> users;
         try{
+            users= new ArrayList<UserNormal>(20);
             users = loadusers();
+            
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Falha ao inicializar users, se for a primeira vez então tente criar um user e dar restart na aplicação");
+            users = new ArrayList<>(20);
         }
-        ArrayList<Sala> salas = new ArrayList<>(5);
-        ArrayList<Musica> playlist = new ArrayList<>();
         
-        
-        try{
+        ArrayList<Musica> playlist ;
+         try{
+            playlist= new ArrayList<Musica>(20);
             playlist = loadmusicas();
             
         }
-        catch(IOException | ClassNotFoundException e){
-            
+        catch(Exception e){
+            playlist = new ArrayList<Musica>(20);
         }
+
+        ArrayList<Sala> salas = new ArrayList<>(5);
+        
+
         
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<String>();
@@ -549,10 +542,6 @@ public class Teste {
                      String pass = JOptionPane.showInputDialog(null,"Insira a password ");      // TODO -> meter a pssword com asteriscos 
                      
                      for(int i = 0;i < users.size();i++) {
-                         System.out.println(users.get(i).getNick());
-                         System.out.println(users.get(i).getPW());
-                         System.out.println(nickname);
-                         System.out.println(pass);
                          if((users.get(i).getNick().equals(nickname)) && (users.get(i).getPW().equals(pass))) {
                              verificacao = true;
                              JOptionPane.showMessageDialog(null, "Login com sucesso");
@@ -626,7 +615,7 @@ public class Teste {
                 
                 switch(mLI2){
                           case 1:         //caso para entrar numa sala já existente
-                                 Sala current_sala  = new Sala(new Guest("guest"));
+                                Sala current_sala  = new Sala(new Guest("guest"));
                                String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
                               int n_salaaa = Integer.parseInt(n_salaa);
                               try{
@@ -679,6 +668,8 @@ public class Teste {
                 
                 Musica m = new Musica(dur, titulo, autor, album, genero);
                 
+                
+                try{
                 if(playlist.isEmpty() == false) {
                     for(Musica musi: playlist) {
                     if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
@@ -691,6 +682,12 @@ public class Teste {
                 }
                 }
                 else {
+                    playlist.add(m);
+                    JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
+                }
+                
+                }
+                catch(Exception e){
                     playlist.add(m);
                     JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
                 }
