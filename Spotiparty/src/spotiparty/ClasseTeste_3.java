@@ -392,28 +392,28 @@ public class ClasseTeste_3 {
     
     public static void main(String[] args) throws IOException, FileNotFoundException, ClassNotFoundException {
         
-        
+        ArrayList<Sala> salas = new ArrayList<>(5);
+        ArrayList<Musica> playlist = new ArrayList<>();
         ArrayList<UserNormal> users = new ArrayList<>(20);
+        UserNormal current_user = new UserNormal();
+        ArrayList<String>suggested = new ArrayList<String>();
+        BibliotecaMusical bib = new BibliotecaMusical();
+        bib.setMusicas(playlist);
+        
+        Musica m1 = new Musica(3.123, "coco", "ranheta", "facada", "pasteis");
+        bib.adicionar_Musica(m1);
+        System.out.println(bib.toString());
+        
         try{
             users = loadusers();
+            playlist = loadmusicas();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Falha ao inicializar users, se for a primeira vez então tente criar um user e dar restart na aplicação");
         }
-        ArrayList<Sala> salas = new ArrayList<>(5);
-        ArrayList<Musica> playlist = new ArrayList<>();
         
-        
-        try{
-            playlist = loadmusicas();
-            
-        }
-        catch(IOException | ClassNotFoundException e){
-            
-        }
-        
-        UserNormal current_user = new UserNormal();
-        ArrayList<String>suggested = new ArrayList<String>();
+        bib.toString();
+         
         suggested.add("Musicas Sugeridas : ");
         int j ; // usada para circular musicas
         
@@ -705,7 +705,7 @@ public class ClasseTeste_3 {
         }
         
         
-        }while(an > 0);     // repeticao do menu principal enquanto nao der exit
+        }while(an > 0 || an == -2);     // repeticao do menu principal enquanto nao der exit
         
         
     }//fim do main
