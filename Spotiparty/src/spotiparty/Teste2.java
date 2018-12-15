@@ -364,7 +364,7 @@ public class Teste2 {
         suggested.add("Sugira uma música : ");
         
         boolean guest = false;
-        int n_sala = 0, idade, an = -2;
+        int idade, an = -2;
         
         do {
 
