@@ -394,7 +394,7 @@ public class Teste2 {
 
         switch (mp) {
             
-            case 1:         //caso para fazer registo
+            case 1:         //caso para fazer registo PRIMEIRO MENU
                 
                 String nome = JOptionPane.showInputDialog(null,"Insira o seu nome \n ");
                 String nick = JOptionPane.showInputDialog(null,"Insira o seu nickname \n ");
@@ -484,7 +484,7 @@ public class Teste2 {
                    
            }
                 
-            case 2:      //caso para fazer log in
+            case 2:      //caso para fazer log in   MENU PRINCIPAL
                 
                 if(users.isEmpty() == false) {
                     
@@ -537,13 +537,14 @@ public class Teste2 {
                             break;
                             
                         case 3:         //caso para ver friendslist
-                            JOptionPane.showMessageDialog( null,"Your friends : \n"
+                            JOptionPane.showMessageDialog( null,"Os teus amigos : \n"
                                     + current_user.listar_amigos());
                             break;
                             
                         case 4:         //caso para listar musicas
                             
                             String s ="";
+                            JOptionPane.showMessageDialog( null,"Biblioteca musical : \n");
                             
                             for(int i = 0;i< playlist.size();i++){
                                 s = s + playlist.get(i).getTitulo() + "\n";
@@ -567,6 +568,9 @@ public class Teste2 {
                             
                     }//fim do switch do menu2
                     
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Não há users registados.\nCrie uma e faça LogIn!");
                 }
                 
                 break;
