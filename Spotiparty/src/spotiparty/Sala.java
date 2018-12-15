@@ -100,7 +100,7 @@ public class Sala {
         }
     }
     
-    public void remover_user(Sala sala, User user) {
+    public void remover_user(Sala sala, UserNormal user) {
         if(Membros.contains(user)) {
             Membros.remove(user);
             JOptionPane.showMessageDialog(null, user.getNome()+" removido da sala "+NumeroDaSala);
@@ -109,20 +109,15 @@ public class Sala {
             JOptionPane.showMessageDialog(null, user.getNome()+" não encontrado");
         }
     }
-    
-    public void print_mensagem(String s) {
-        System.out.println(s);
-    }    
      
     public Musica play_music(String titulo, String autor) {
         for(Musica m: Musicas) {
-            if((m.getTitulo() == titulo) && (m.getAutor() == autor)) {
+            if((m.getTitulo().equals(titulo)) && (m.getAutor().equals(autor))) {
                 return m;
             }
             break;
         }
         return null;
     }
-    
 }
 

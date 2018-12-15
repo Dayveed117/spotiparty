@@ -443,8 +443,8 @@ public class Teste2 {
                    
                    break;
                    
-               case 2:
-                   //Criar sala
+               case 2:                  //Caso para criar uma criar sala
+                   
                    String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                            + "Digite o numero da sala \n");
                    
@@ -576,7 +576,7 @@ public class Teste2 {
                 
                 int mLI2 = menu_loggedIn(current_user, true);
                 
-                switch(mLI2){
+                switch(mLI2) {
                     
                     case 1:         //caso para entrar numa sala já existente
                         
