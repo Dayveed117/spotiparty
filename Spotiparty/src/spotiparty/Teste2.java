@@ -281,59 +281,56 @@ public class Teste2 {
     
     public static int menu_loggedIn(User current_user, boolean guest) {            //nao sei se isto aqui está mal se é na main
         
-        if(guest == false) {
-            
-            String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty!\n"
-                    + "1 - Entrar numa sala \n"
-                    + "2 - Criar sala \n"
-                    + "3 - Ver amigos \n"
-                    + "4 - Ver musicas \n"
-                    + "5 - Exit ");
-            
-            int escolha = Integer.parseInt(choice);
-            while(escolha < 1 || escolha > 5) {
+        while(true) {
+            try {
                 
-                choice = JOptionPane.showInputDialog(null, "Welcome to SpotiParty!\n"
-                        + "1 - Entrar numa sala \n"
-                        + "2 - Criar sala \n"
-                        + "3 - Ver amigos \n"
-                        + "4 - Ver musicas \n"
-                        + "5 - Exit\n");
-                
-                escolha = Integer.parseInt(choice);
-                
-            }
-            return escolha;
-        }
-        
-        //entrar na sala como guest
-        else {
-            int escolha= 0;
-            String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " + " guest \n "
-                    + "1 - Entrar numa sala \n"
-                    + "2 - Exit ");
-            
-            while(true){
-                try{
+                if(guest == false) {                //no caso de entrar como UserNormal
+                    
+                    String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty!\n"
+                            + "1 - Entrar numa sala \n"
+                            + "2 - Criar sala \n"
+                            + "3 - Ver amigos \n"
+                            + "4 - Ver musicas \n"
+                            + "5 - Exit ");
+                    
+                    int escolha = Integer.parseInt(choice);
+                    while(escolha < 1 || escolha > 5) {
+                        
+                        choice = JOptionPane.showInputDialog(null, "Welcome to SpotiParty!\n"
+                                + "1 - Entrar numa sala \n"
+                                + "2 - Criar sala \n"
+                                + "3 - Ver amigos \n"
+                                + "4 - Ver musicas \n"
+                                + "5 - Exit\n");
+                        
+                        escolha = Integer.parseInt(choice);
+                        
+                    }
+                    return escolha;
+                }//fim do menu do UserNormal
+
+                else {               //entrar na sala como guest
+                    
+                    int escolha= 0;
+                    String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty" + " Guest!\n"
+                            + "1 - Entrar numa sala\n"
+                            + "2 - Exit\n");
+                    
                     escolha = Integer.parseInt(choice);
-                    break;
-                }
-                catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Insira uma escolha valida");
-                }
-                
+                    while(escolha < 1 || escolha > 2) {
+                        
+                        choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty" + " Guest!\n"
+                                + "1 - Entrar numa sala\n"
+                                + "2 - Exit\n");
+                        
+                        escolha = Integer.parseInt(choice);
+                    }
+                    return escolha;
+                }//fim do menu do guest
             }
-            while(escolha < 1 || escolha > 2) {
-                
-                choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " + " guest \n "
-                        + "1 - Entrar numa sala \n"
-                        + "2 - Exit\n");
-                
-                escolha = Integer.parseInt(choice);
-                System.out.println(escolha);
-                
+            catch(NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Insira uma escolha valida");
             }
-            return escolha;
         }
     }
     
@@ -558,7 +555,6 @@ public class Teste2 {
                 int mLI2 = menu_loggedIn(current_user, true);
                 
                 switch(mLI2){
-                    
                     
                     case 1:         //caso para entrar numa sala já existente
                         
