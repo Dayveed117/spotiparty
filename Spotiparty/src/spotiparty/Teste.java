@@ -664,7 +664,6 @@ public class Teste {
                 case 6:         //caso para sair da aplicação
                 
                 an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
-                System.out.println(an);
                 if(an < 0){
                       save(users);
                       save_musicas(playlist);
@@ -684,26 +683,20 @@ public class Teste {
                 
                 Musica m = new Musica(dur, titulo, autor, album, genero);
                 
-                
-                try{
                 if(playlist.isEmpty() == false) {
+                    
                     for(Musica musi: playlist) {
-                    if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
-                        JOptionPane.showMessageDialog(null, "Musica já registada");
-                    }
-                    else {
-                        playlist.add(m);
-                        JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
+                        if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
+                            JOptionPane.showMessageDialog(null, "Musica já registada");
+                        }
+                        else {
+                            playlist.add(m);
+                            JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
+                        }
                     }
                 }
-                }
+               
                 else {
-                    playlist.add(m);
-                    JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
-                }
-                
-                }
-                catch(Exception e){
                     playlist.add(m);
                     JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
                 }
