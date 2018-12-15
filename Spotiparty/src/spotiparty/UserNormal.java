@@ -94,11 +94,11 @@ public class UserNormal extends User implements Serializable{
         for(int i = 0; i < amigos.size();i++){
             if(u == amigos.get(i)){
                 found = 1;
+                break;
             }
         }
         if(found == 0){
             amigos.add(u);
-            JOptionPane.showMessageDialog(null,"Amigo adicionado com sucesso! ");
         }
     }
     
@@ -118,7 +118,7 @@ public class UserNormal extends User implements Serializable{
         String s = "";
         
         for(int i = 0;i < amigos.size();i++){
-            s = s + amigos.get(i).getNome();
+            s = s + amigos.get(i).getNick()+"\n";
         }
         return s;
     }

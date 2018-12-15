@@ -158,7 +158,7 @@ public class Teste2 {
                      
                      break;
                      
-                 case 2:                //ver lista de amigos
+                 case 2:                //ver lista de membros na sala
                      
                      String name_ ="";
                      for(int i = 0; i < Membros.size();i++){
@@ -238,13 +238,13 @@ public class Teste2 {
                     
                     break;
                     
-                case 1:                 //ver amigos
+                case 1:                 //ver Membros da sala
                     
-                    String name_ =" ";
+                    String nick ="";
                     for( int i = 0; i < Membros.size();i++){
-                        name_ = name_ + Membros.get(i).getNome();
+                        nick = nick + Membros.get(i).getNick();
                     }
-                    JOptionPane.showMessageDialog(null,name_);
+                    JOptionPane.showMessageDialog(null,nick);
                     entrar_sala(sala,m,Membros,musicas,users,musicas_sugeridas);
                     
                     break;
@@ -319,9 +319,10 @@ public class Teste2 {
                     String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty!\n\n"
                             + "1 - Entrar numa sala \n"
                             + "2 - Criar sala \n"
-                            + "3 - Ver amigos \n"
-                            + "4 - Ver musicas \n"
-                            + "5 - Sair \n\n");
+                            + "3 - Adicionar amigo \n"
+                            + "4 - Ver amigos \n"
+                            + "5 - Ver musicas \n"
+                            + "6 - Sair \n\n");
                     
                     int escolha = Integer.parseInt(choice);
                     while(escolha < 1 || escolha > 5) {
@@ -329,9 +330,10 @@ public class Teste2 {
                         choice = JOptionPane.showInputDialog(null, "Welcome to SpotiParty!\n\n"
                                 + "1 - Entrar numa sala \n"
                                 + "2 - Criar sala \n"
-                                + "3 - Ver amigos \n"
-                                + "4 - Ver musicas \n"
-                                + "5 - Sair\n\n");
+                                + "3 - Adicionar amigo \n"
+                                + "4 - Ver amigos \n"
+                                + "5 - Ver musicas \n"
+                                + "6 - Sair\n\n");
                         
                         escolha = Integer.parseInt(choice);
                         
@@ -434,7 +436,7 @@ public class Teste2 {
                case 1:         //caso para entrar numa sala ;já existente           MENU SECUNDARIO     1
                    
                    Sala current_sala = new Sala(current_user);
-                   String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
+                   String n_salaa = JOptionPane.showInputDialog(null,"Número da sala que pretende entrar?");
                    int n_salaaa = Integer.parseInt(n_salaa);
                    try{
                        current_sala = salas.get(n_salaaa);
@@ -445,7 +447,7 @@ public class Teste2 {
                    
                    try{
                        current_sala.getMembros().add(current_user);
-                       entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
+                       entrar_sala(current_sala, current_sala.getMensagens(), current_sala.getMembros(), current_sala.getMusicas(), users, suggested);
                    }
                    catch(Exception e){
                        JOptionPane.showMessageDialog(null, "Erro ao entrar na sala");
@@ -465,7 +467,32 @@ public class Teste2 {
                    
                    break;
                    
-               case 3:         //caso para ver friendslist                      MENU SECUNDARIO         1
+                   
+               case 3:              //adicionar Amigos          MENU SECUNDARIO 1
+                   
+                   String nic = JOptionPane.showInputDialog(null,"Que user pretende adicionar à lista de amigos? \n");
+                   if(!is_in_list(nic,current_user.getAmigos()) && is_in_list(nic,users)) {
+                       for(int i = 0;i < users.size();i++) {
+                           if(nic.equals(users.get(i).getNick())) {
+                               UserNormal userr = users.get(i).clone();
+                               current_user.addFriend(userr);
+                               JOptionPane.showMessageDialog(null,"User adicionado com sucesso");
+                           }
+                       }
+                   }
+                   else{
+                       if(is_in_list(nic,current_user.getAmigos())) {
+                           JOptionPane.showMessageDialog(null,"User já está nos amigos!");
+                       }
+                       else{
+                           JOptionPane.showMessageDialog(null,"User não existe...");
+                   }
+                   
+                   break;
+                   
+                   }
+                   
+               case 4:         //caso para ver friendslist                      MENU SECUNDARIO         1
                    
                    JOptionPane.showMessageDialog( null,"Os teus amigos : \n"
                            + current_user.listar_amigos());
@@ -473,7 +500,7 @@ public class Teste2 {
                    
                    break;
                    
-               case 4:         //caso para listar musicas               MENU SECUNDARIO         1
+               case 5:         //caso para listar musicas               MENU SECUNDARIO         1
                    
                    String s ="";
                    for(int i = 0;i< playlist.size();i++){
@@ -485,24 +512,23 @@ public class Teste2 {
                    JOptionPane.showMessageDialog(null, "Lista de músicas:\n\n"+s+"\n");
                    break;
                    
-               case 5:         //caso para sair da aplicação                MENU SECUNDARIO         1
+               case 6:         //caso para sair da aplicação                MENU SECUNDARIO         1
+                   
                    int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                    if(and == 0){
                        System.exit(0);
                    }
                    
-                   break;
+               break;
                
            }
                 
             case 2:      //caso para fazer log in   MENU PRINCIPAL
-                System.out.println("verificação");
+                
                 if(users.isEmpty() == false) {
-                    
                     boolean verificacao = false;
                     
                     do {
-                        System.out.println("verificação");
                         String nickname = JOptionPane.showInputDialog(null,"Insira o seu nickname ");
                         String pass = JOptionPane.showInputDialog(null,"Insira a password ");      
                         
@@ -547,12 +573,37 @@ public class Teste2 {
                             criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),users,suggested);
                             break;
                             
-                        case 3:         //caso para ver friendslist         MENU SECUNDARIO         2
+                            
+                        case 3:             //adicionar amigos              MENU SECUNDARIO 2
+                            
+                            String nic = JOptionPane.showInputDialog(null,"Que user pretende adicionar à lista de amigos? \n");
+                            if(!is_in_list(nic,current_user.getAmigos()) && is_in_list(nic,users)) {
+                                for(int i = 0;i < users.size();i++) {
+                                    if(nic.equals(users.get(i).getNick())) {
+                                        UserNormal userr = users.get(i).clone();
+                                        current_user.addFriend(userr);
+                                        JOptionPane.showMessageDialog(null,"User adicionado com sucesso!");
+                                        break;
+                                    }
+                                }
+                            }
+                            else {
+                                if(is_in_list(nic,current_user.getAmigos())) {
+                                    JOptionPane.showMessageDialog(null,"User já está nos amigos!");
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"User não existe...");
+                                }
+                            }
+                            
+                            break;
+                                   
+                        case 4:         //caso para ver friendslist         MENU SECUNDARIO         2
                             JOptionPane.showMessageDialog( null,"Os teus amigos : \n"
                                     + current_user.listar_amigos());
                             break;
                             
-                        case 4:         //caso para listar musicas      MENU SECUNDARIO         2
+                        case 5:         //caso para listar musicas      MENU SECUNDARIO         2
                             
                             String s ="";
                             for(int i = 0;i< playlist.size();i++){
@@ -565,7 +616,7 @@ public class Teste2 {
                             
                             break;
                             
-                        case 5:         //caso para sair da aplicação       MENU SECUNDARIO         2
+                        case 6:         //caso para sair da aplicação       MENU SECUNDARIO         2
                             
                             int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                             
