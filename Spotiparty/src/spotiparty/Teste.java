@@ -698,7 +698,6 @@ public class Teste {
                 
             case 5:         //caso para remover uma musica ao vetor playlist
                 
-                System.out.println(playlist.isEmpty());
                 String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
                 String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
                 
