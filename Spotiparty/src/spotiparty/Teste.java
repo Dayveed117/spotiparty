@@ -673,7 +673,8 @@ public class Teste {
                 
                 if(playlist.isEmpty() == false) {
                     
-                    for(Musica musi: playlist) {
+                    try{
+                        for(Musica musi: playlist) {
                         if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
                             JOptionPane.showMessageDialog(null, "Musica já registada");
                             break;
@@ -682,18 +683,23 @@ public class Teste {
                             playlist.add(m);
                             JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
                         }
+                        }
+                    }
+                    catch(Exception e) {
                     }
                 }
                 else {
                     playlist.add(m);
                     JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
+                    System.out.println(playlist.isEmpty());
                 }
                 
                 break;
                 
                 
             case 5:         //caso para remover uma musica ao vetor playlist
-              
+                
+                System.out.println(playlist.isEmpty());
                 String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
                 String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
                 
@@ -705,12 +711,12 @@ public class Teste {
                 for(Musica mus: playlist) {
                     if(tit.equals(mus.getTitulo()) && aut.equals(mus.getAutor())) {
                         playlist.remove(mus);
-                        JOptionPane.showMessageDialog(null, "Musica removida "
-                                + "com sucesso");
+                        JOptionPane.showMessageDialog(null, "Musica removida "+"com sucesso");
                         break;
                     }
                     else{
                         JOptionPane.showMessageDialog(null,"Musica nao encontrada nos registos");
+                        break;
                     }
                 }
                 
