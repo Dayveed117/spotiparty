@@ -615,10 +615,9 @@ public class Teste {
 
                                    break;
                         
-                   
                                }
        
-                    }
+                    }//fim do switch do menu2
                     JOptionPane.showMessageDialog(null,"Nenhum utilizador registado.");
                 }         
 
@@ -630,6 +629,7 @@ public class Teste {
                 int mLI2 = menu_loggedIn(current_user, true);
                 
                 switch(mLI2){
+                    
                           case 1:         //caso para entrar numa sala já existente
                                 Sala current_sala  = new Sala(new Guest("guest"));
                                String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
@@ -659,20 +659,8 @@ public class Teste {
                 
                 break;
                 
-       
-                
-                case 6:         //caso para sair da aplicação
-                
-                an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
-                if(an < 0){
-                      save(users);
-                      save_musicas(playlist);
-                      System.exit(0);
-                }
-                
-                break;
-                
-                 case 4:         //caso para adicionar uma musica ao vetor playlist
+               
+            case 4:         //caso para adicionar uma musica ao vetor playlist
                 
                 String titulo = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
                 String autor = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
@@ -688,6 +676,7 @@ public class Teste {
                     for(Musica musi: playlist) {
                         if(titulo.equals(musi.getTitulo()) && autor.equals(musi.getAutor())) {
                             JOptionPane.showMessageDialog(null, "Musica já registada");
+                            break;
                         }
                         else {
                             playlist.add(m);
@@ -695,13 +684,13 @@ public class Teste {
                         }
                     }
                 }
-               
                 else {
                     playlist.add(m);
                     JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
                 }
                 
                 break;
+                
                 
             case 5:         //caso para remover uma musica ao vetor playlist
               
@@ -712,6 +701,7 @@ public class Teste {
                     JOptionPane.showMessageDialog(null, "Não há músicas a remover.");
                     break;
                 }
+                
                 for(Musica mus: playlist) {
                     if(tit.equals(mus.getTitulo()) && aut.equals(mus.getAutor())) {
                         playlist.remove(mus);
@@ -725,11 +715,22 @@ public class Teste {
                 }
                 
                 break;
+                
+                
+            case 6:         //caso para sair da aplicação
+                
+                an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
+                if(an < 0){
+                      save(users);
+                      save_musicas(playlist);
+                      System.exit(0);
+                }
+                
+                break;
                         
         }
         
         }while(an > 0 || an == -2);     // repeticao do menu principal enquanto nao der exit
-        
         
     }//fim do main
 }//fim da classe 
