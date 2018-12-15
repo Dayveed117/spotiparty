@@ -399,7 +399,7 @@ public class Teste {
         
         ArrayList<UserNormal> users;
         try{
-            users= new ArrayList<UserNormal>(20);
+            users= new ArrayList<>(20);
             users = loadusers();
             
         }
@@ -409,12 +409,12 @@ public class Teste {
         
         ArrayList<Musica> playlist ;
          try{
-            playlist= new ArrayList<Musica>(20);
+            playlist= new ArrayList<>(20);
             playlist = loadmusicas();
             
         }
         catch(Exception e){
-            playlist = new ArrayList<Musica>(20);
+            playlist = new ArrayList<>(20);
         }
 
         ArrayList<Sala> salas = new ArrayList<>(5);
@@ -422,7 +422,7 @@ public class Teste {
 
         
         UserNormal current_user = new UserNormal();
-        ArrayList<String>suggested = new ArrayList<String>();
+        ArrayList<String>suggested = new ArrayList<>();
         suggested.add("Musicas Sugeridas : ");
         int j ; // usada para circular musicas
         
@@ -444,19 +444,18 @@ public class Teste {
             
             case 1:         //caso para fazer registo
                 
-           String nome = JOptionPane.showInputDialog(null,"Insira o seu nome \n ");
-           String nick = JOptionPane.showInputDialog(null,"Insira o seu nickname \n ");
+            String nome = JOptionPane.showInputDialog(null,"Insira o seu nome \n ");
+            String nick = JOptionPane.showInputDialog(null,"Insira o seu nickname \n ");
           
            while(true){
-           try{
-           String num = JOptionPane.showInputDialog(null,"Insira a sua idade \n ");
-            idade = Integer.parseInt(num);
-           break;
-           }
-           catch(Exception e){
-               JOptionPane.showMessageDialog(null, "A idade tem de ser um numero !!!");
-               
-           }
+               try{
+                   String num = JOptionPane.showInputDialog(null,"Insira a sua idade \n ");
+                   idade = Integer.parseInt(num);
+                   break;
+               }
+               catch(Exception e){
+                   JOptionPane.showMessageDialog(null, "A idade tem de ser um numero !!!");
+               }
            }
            String password = JOptionPane.showInputDialog(null,"Insira a sua password \n");
            
@@ -554,12 +553,10 @@ public class Teste {
                              break;
                          }
                
-                         
                      }
                       if(verificacao == false){
                           JOptionPane.showMessageDialog(null, "Dados Incorretos");
                       }
-                     
                      
                      }while(verificacao == false);
                     
@@ -597,30 +594,39 @@ public class Teste {
                               break;
                         
                           case 4:         //caso para listar musicas
-                                  String s ="";
-                        for(int i = 0;i< playlist.size();i++){
-                            s = s + playlist.get(i).getTitulo() + "\n";
-                        }
-                        
-                        JOptionPane.showMessageDialog(null, s);
+                               
+                              String s ="";
+                                  
+                              for(int i = 0;i< playlist.size();i++){
+                                  s = s + playlist.get(i).getTitulo() + "\n";
+                              }
+                              
+                              JOptionPane.showMessageDialog(null, s);
+                              
                               break;
                         
                            case 5:         //caso para sair da aplicação
+                               
+                               int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
+                          
+                               if(and == 0){
+                                   save(users);                     
+                                   System.exit(0);
+
+                                   break;
                         
-                        int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
-                        if(and == 0){
-                            save(users);
-                           System.exit(0);
-                              break;
-                        
-                     }
-                }
-                     JOptionPane.showMessageDialog(null,"Nenhum utilizador registado.");
+                   
+                               }
+       
+                    }
+                    JOptionPane.showMessageDialog(null,"Nenhum utilizador registado.");
                 }         
+
                 break;
+                
                        
-            case 3:  
-                //caso para entrar como guest
+            case 3:             //caso para entrar como guest
+                
                 int mLI2 = menu_loggedIn(current_user, true);
                 
                 switch(mLI2){
@@ -648,14 +654,14 @@ public class Teste {
                                 break;
 
                                  }
-        }
+                        }//fim do switch do menu do guest
         
                 
                 break;
                 
        
                 
-            case 6:         //caso para sair da aplicação
+                case 6:         //caso para sair da aplicação
                 
                 an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                 System.out.println(an);
@@ -711,11 +717,14 @@ public class Teste {
                 
                 if(playlist.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Não há músicas a remover.");
+                    break;
                 }
-                
                 for(Musica mus: playlist) {
                     if(tit.equals(mus.getTitulo()) && aut.equals(mus.getAutor())) {
                         playlist.remove(mus);
+                        JOptionPane.showMessageDialog(null, "Musica removida "
+                                + "com sucesso");
+                        break;
                     }
                     else{
                         JOptionPane.showMessageDialog(null,"Musica nao encontrada nos registos");
@@ -723,10 +732,8 @@ public class Teste {
                 }
                 
                 break;
-                
-                
+                        
         }
-        
         
         }while(an > 0 || an == -2);     // repeticao do menu principal enquanto nao der exit
         
