@@ -67,6 +67,7 @@ public class Teste2 {
     
      
      public static ArrayList<Musica> loadmusicas() throws FileNotFoundException, IOException, ClassNotFoundException{
+        
          String basePath = new File("musicas.dat").getAbsolutePath();
          ObjectInputStream fi = new ObjectInputStream(new FileInputStream(basePath));
          
@@ -75,7 +76,8 @@ public class Teste2 {
          return musicas;
      }
      
-     public static boolean is_in_list(String nome,ArrayList<UserNormal> lista){
+     public static boolean is_in_list(String nome, ArrayList<UserNormal> lista){
+         
          boolean encontrou = false;
          for(int i = 0;i < lista.size() ; i++){
              if(lista.get(i).getNome() == nome){
@@ -111,12 +113,12 @@ public class Teste2 {
  
         }
         
-         msg = JOptionPane.showInputDialog(null,"Chat:                                  Musica Atual :           \n "+
+         msg = JOptionPane.showInputDialog(null,"Chat:                                  Musica Atual :           \n"+
                  s 
                  + "                                                                                        0 - Exit \n"
-                 + "                                                                                        1 - Adicionar user á sala \n "
-                 + "                                                                                        2 - Ver os users nesta sala \n "
-                 + "                                                                                        4 - Mudar Musica \n");
+                 + "                                                                                        1 - Adicionar user á sala \n"
+                 + "                                                                                        2 - Ver os users nesta sala \n"
+                 + "                                                                                        3 - Mudar Musica \n");
          
          try{
              j = Integer.parseInt(msg);
@@ -157,7 +159,7 @@ public class Teste2 {
              }
              
              //Mudar musica
-             if(j == 4){
+             if(j == 3){
                  String music = JOptionPane.showInputDialog(null,"Que musica quer ouvir ? ");
                  musicas.get(0).setTitulo(music);
                  criar_sala(sala,m,Membros,musicas,users,musicas_sugeridas);
