@@ -235,7 +235,7 @@ public class Teste {
             j = Integer.parseInt(msg);
             if(j == 0 ){
                 save(users);
-             System.exit(0);
+                System.exit(0);
               }
           
             //Ver amigos
@@ -362,7 +362,7 @@ public class Teste {
                }
                return escolha;
         }
-        
+        //entrar na sala como guest
         else {
         int escolha= 0;
         String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty " + " guest \n "
@@ -466,7 +466,6 @@ public class Teste {
            JOptionPane.showMessageDialog(null, "Registo feito com sucesso!");
            
                 int mLI1 = menu_loggedIn(current_user, guest);           //menu Logged In
-                 
 
                 switch (mLI1) {
                     
