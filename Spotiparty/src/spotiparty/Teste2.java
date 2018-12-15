@@ -80,15 +80,16 @@ public class Teste2 {
 
          boolean encontrou = false;
          for(int i = 0;i < lista.size() ; i++){
-             if(nome.equals(lista.get(i).getNome())){
+             if(nome.equals(lista.get(i).getNick())){
                  encontrou = true;
+                 break;
              }
          }
          return encontrou;
      }//fim do is_in_list
     
     
-     public static void criar_sala(Sala sala , ArrayList<String> m,ArrayList<UserNormal> Membros,ArrayList<Musica> musicas,ArrayList<UserNormal> users,ArrayList<String> musicas_sugeridas){
+     public static void criar_sala(Sala sala , ArrayList<String> m, ArrayList<UserNormal> Membros, ArrayList<Musica> musicas, ArrayList<UserNormal> users, ArrayList<String> musicas_sugeridas) {
          
          String s="";
          String msg="";
@@ -132,34 +133,39 @@ public class Teste2 {
                      
                      break;
                      
-                 case 1:                       //Adicionar membro a sala
+                 case 1:                       //Adicionar membro à sala
                      
-                     String u= JOptionPane.showInputDialog(null,"Que user pretende adicionar á sala ? \n");
-                     
+                     String u = JOptionPane.showInputDialog(null,"Que user pretende adicionar à sala ? \n");
+
                      if(!is_in_list(u,Membros) && is_in_list(u,users)) {
-                         
                          for(int i = 0;i < users.size();i++) {
-                             if(u.equals(users.get(i).getNome())) {
+                             if(u.equals(users.get(i).getNick())) {
                                  UserNormal userr = users.get(i).clone();
                                  Membros.add(userr);
+                                 save(users);
                                  JOptionPane.showMessageDialog(null,"User adicionado com sucesso");
                                  criar_sala(sala,m,Membros,musicas,users,musicas_sugeridas);
                              }
                          }
                      }
-                     JOptionPane.showMessageDialog(null,"User não existe..");
-                     criar_sala(sala,m,Membros,musicas,users,musicas_sugeridas);
+                     if(is_in_list(u,Membros)) {
+                         JOptionPane.showMessageDialog(null,"User já está na sala!");
+                     }
+                     else{
+                         JOptionPane.showMessageDialog(null,"User não existe...");
+                         criar_sala(sala,m,Membros,musicas,users,musicas_sugeridas);
+                     }
                      
                      break;
                      
                  case 2:                //ver lista de amigos
                      
-                     String name_ =" ";
-                     for( int i = 0; i < Membros.size();i++){
-                         name_ = name_ + Membros.get(i).getNome();
+                     String name_ ="";
+                     for(int i = 0; i < Membros.size();i++){
+                         name_ += Membros.get(i).getNick()+"\n";
                      }
                      
-                     JOptionPane.showMessageDialog(null,name_);
+                     JOptionPane.showMessageDialog(null,"Users nesta sala:\n\n"+name_+"\n");
                      criar_sala(sala,m,Membros,musicas,users,musicas_sugeridas);
                      
                      break;
@@ -269,24 +275,26 @@ public class Teste2 {
         
         while(true){
             try{
-                String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty! Log in, sign up, ou entra como um guest! \n"
-                        + "1 - Registar \n"
-                        + "2 - Já tenho uma conta \n"
-                        + "3 - Entrar como guest  \n"
-                        + "4 - Adicionar Música  \n"
-                        + "5 - Remover Música  \n"
-                        + "6 - Sair ");
+                String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty! Log in, sign up, ou entra como um guest! \n\n"
+                        + "1 - Sign Up \n"
+                        + "2 - Log In \n"
+                        + "3 - Entrar como guest \n"
+                        + "4 - Adicionar Música \n"
+                        + "5 - Remover Música \n"
+                        + "6 - Listar Users \n"
+                        + "7 - Sair \n\n");
                 
                 int escolha = Integer.parseInt(choice);
-                while(escolha < 1 || escolha > 6) {
+                while(escolha < 1 || escolha > 7) {
                     
-                    choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty! Log in, sign up, ou entra como um guest! \n"
-                            + "1 - Registar \n"
-                            + "2 - Já tenho uma conta \n"
-                            + "3 - Entrar como guest  \n"
-                            + "4 - Adicionar Música  \n"
-                            + "5 - Remover Música  \n"
-                            + "6 - Sair ");
+                    choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty! Log in, sign up, ou entra como um guest! \n\n"
+                            + "1 - Sign Up \n"
+                            + "2 - Log In \n"
+                            + "3 - Entrar como guest \n"
+                            + "4 - Adicionar Música \n"
+                            + "5 - Remover Música \n"
+                            + "6 - Listar Users \n"
+                            + "7 - Sair \n\n");
                     
                     escolha = Integer.parseInt(choice);
                     
@@ -308,22 +316,22 @@ public class Teste2 {
                 
                 if(guest == false) {                //no caso de entrar como UserNormal
                     
-                    String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty!\n"
+                    String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty!\n\n"
                             + "1 - Entrar numa sala \n"
                             + "2 - Criar sala \n"
                             + "3 - Ver amigos \n"
                             + "4 - Ver musicas \n"
-                            + "5 - Exit ");
+                            + "5 - Sair \n\n");
                     
                     int escolha = Integer.parseInt(choice);
                     while(escolha < 1 || escolha > 5) {
                         
-                        choice = JOptionPane.showInputDialog(null, "Welcome to SpotiParty!\n"
+                        choice = JOptionPane.showInputDialog(null, "Welcome to SpotiParty!\n\n"
                                 + "1 - Entrar numa sala \n"
                                 + "2 - Criar sala \n"
                                 + "3 - Ver amigos \n"
                                 + "4 - Ver musicas \n"
-                                + "5 - Exit\n");
+                                + "5 - Sair\n\n");
                         
                         escolha = Integer.parseInt(choice);
                         
@@ -334,16 +342,16 @@ public class Teste2 {
                 else {               //entrar na sala como guest
                     
                     int escolha= 0;
-                    String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty" + " Guest!\n"
+                    String choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty" + " Guest!\n\n"
                             + "1 - Entrar numa sala\n"
-                            + "2 - Exit\n");
+                            + "2 - Exit\n\n");
                     
                     escolha = Integer.parseInt(choice);
                     while(escolha < 1 || escolha > 2) {
                         
-                        choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty" + " Guest!\n"
+                        choice = JOptionPane.showInputDialog(null,"Welcome to SpotiParty" + " Guest!\n\n"
                                 + "1 - Entrar numa sala\n"
-                                + "2 - Exit\n");
+                                + "2 - Exit\n\n");
                         
                         escolha = Integer.parseInt(choice);
                     }
@@ -394,7 +402,7 @@ public class Teste2 {
 
         switch (mp) {
             
-            case 1:         //caso para fazer registo PRIMEIRO MENU
+            case 1:         //caso para fazer registo de user           MENU PRINCIPAL
                 
                 String nome = JOptionPane.showInputDialog(null,"Insira o seu nome \n ");
                 String nick = JOptionPane.showInputDialog(null,"Insira o seu nickname \n ");
@@ -415,13 +423,15 @@ public class Teste2 {
                 users.add(novo);
                 current_user = novo.clone();
                 
+                save(users);
+                
                 JOptionPane.showMessageDialog(null, "Registo feito com sucesso!");
            
            int mLI1 = menu_loggedIn(current_user, guest);           //menu Logged In
            
            switch (mLI1) {
                
-               case 1:         //caso para entrar numa sala ;já existente
+               case 1:         //caso para entrar numa sala ;já existente           MENU SECUNDARIO     1
                    
                    Sala current_sala = new Sala(current_user);
                    String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
@@ -443,7 +453,7 @@ public class Teste2 {
                    
                    break;
                    
-               case 2:                  //Caso para criar uma criar sala
+               case 2:                  //Caso para criar uma criar sala            MENU SECUNDARIO         1
                    
                    String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                            + "Digite o numero da sala \n");
@@ -455,45 +465,46 @@ public class Teste2 {
                    
                    break;
                    
-               case 3:         //caso para ver friendslist
+               case 3:         //caso para ver friendslist                      MENU SECUNDARIO         1
                    
-                   JOptionPane.showMessageDialog( null,"Your friends : \n"
+                   JOptionPane.showMessageDialog( null,"Os teus amigos : \n"
                            + current_user.listar_amigos());
                    mLI1 = menu_loggedIn(current_user, guest);
                    
                    break;
                    
-               case 4:         //caso para listar musicas
+               case 4:         //caso para listar musicas               MENU SECUNDARIO         1
+                   
                    String s ="";
                    for(int i = 0;i< playlist.size();i++){
-                       s = s + playlist.get(i).getTitulo() + "\n";
+                       String title = playlist.get(i).getTitulo();
+                       String author = playlist.get(i).getAutor()+"\n";
+                       s += title+"      -      "+author;
                    }
                    
-                   JOptionPane.showMessageDialog(null,s);
+                   JOptionPane.showMessageDialog(null, "Lista de músicas:\n\n"+s+"\n");
                    break;
                    
-               case 5:         //caso para sair da aplicação
+               case 5:         //caso para sair da aplicação                MENU SECUNDARIO         1
                    int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                    if(and == 0){
-                       save(users);
-                       save_musicas(playlist);
                        System.exit(0);
                    }
                    
                    break;
-                   
+               
            }
                 
             case 2:      //caso para fazer log in   MENU PRINCIPAL
-                
+                System.out.println("verificação");
                 if(users.isEmpty() == false) {
                     
                     boolean verificacao = false;
                     
                     do {
-                        
+                        System.out.println("verificação");
                         String nickname = JOptionPane.showInputDialog(null,"Insira o seu nickname ");
-                        String pass = JOptionPane.showInputDialog(null,"Insira a password ");      // TODO -> meter a pssword com asteriscos
+                        String pass = JOptionPane.showInputDialog(null,"Insira a password ");      
                         
                         for(int i = 0;i < users.size();i++) {
                             if((users.get(i).getNick().equals(nickname)) && (users.get(i).getPW().equals(pass))) {
@@ -513,7 +524,7 @@ public class Teste2 {
                     
                     switch (mLI2) {
                         
-                        case 1:         //caso para entrar numa sala já existente
+                        case 1:         //caso para entrar numa sala já existente       MENU SECUNDARIO         2
                             
                             Sala current_sala = new Sala(current_user);
                             String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
@@ -526,7 +537,7 @@ public class Teste2 {
                             entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
                             break;
                             
-                        case 2:         //caso para criar uma sala nova
+                        case 2:         //caso para criar uma sala nova             MENU SECUNDARIO         2
                             String nome_sala = JOptionPane.showInputDialog(null,"Criar a sua sala : \n"
                                     + "Digite o numero da sala \n");
                             
@@ -536,30 +547,29 @@ public class Teste2 {
                             criar_sala(nova_sala,nova_sala.getMensagens(),nova_sala.getMembros(),nova_sala.getMusicas(),users,suggested);
                             break;
                             
-                        case 3:         //caso para ver friendslist
+                        case 3:         //caso para ver friendslist         MENU SECUNDARIO         2
                             JOptionPane.showMessageDialog( null,"Os teus amigos : \n"
                                     + current_user.listar_amigos());
                             break;
                             
-                        case 4:         //caso para listar musicas
+                        case 4:         //caso para listar musicas      MENU SECUNDARIO         2
                             
                             String s ="";
-                            JOptionPane.showMessageDialog( null,"Biblioteca musical : \n");
-                            
                             for(int i = 0;i< playlist.size();i++){
-                                s = s + playlist.get(i).getTitulo() + "\n";
+                                String title = playlist.get(i).getTitulo();
+                                String author = playlist.get(i).getAutor()+"\n";
+                                s += title+"      -      "+author;
                             }
                             
-                            JOptionPane.showMessageDialog(null, s);
+                            JOptionPane.showMessageDialog(null,"Lista de músicas\n\n"+s);
                             
                             break;
                             
-                        case 5:         //caso para sair da aplicação
+                        case 5:         //caso para sair da aplicação       MENU SECUNDARIO         2
                             
                             int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                             
                             if(and == 0){
-                                save(users);
                                 System.exit(0);
                                 
                                 break;
@@ -573,16 +583,15 @@ public class Teste2 {
                     JOptionPane.showMessageDialog(null, "Não há users registados.\nCrie uma e faça LogIn!");
                 }
                 
-                break;
-                
-                
+                break;          //break do caso 2
+        
             case 3:             //caso para entrar como guest
                 
                 int mLI2 = menu_loggedIn(current_user, true);
                 
                 switch(mLI2) {
                     
-                    case 1:         //caso para entrar numa sala já existente
+                    case 1:         //caso para entrar numa sala já existente       MENU SECUNDARIO         3
                         
                         Sala current_sala  = new Sala(new Guest("guest"));
                         String n_salaa = JOptionPane.showInputDialog(null,"Numero da sala que pretende entrar");
@@ -595,21 +604,19 @@ public class Teste2 {
                         }
                         break;
                         
-                    case 2:         //caso para sair da aplicação
+                    case 2:         //caso para sair da aplicação           MENU SECUNDARIO         3
                         
                         int and = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                         if(and == 0){
-                            save(users);
-                            save_musicas(playlist);
                             System.exit(0);
                             break;
                             
                         }
                 }//fim do switch do menu do guest
                 
-                break;
+                break;          //break do caso 3
                 
-            case 4:         //caso para adicionar uma musica ao vetor playlist
+            case 4:         //caso para adicionar uma musica ao vetor playlist      MENU PRINCIPAL
                 
                 String titulo = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
                 String autor = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
@@ -652,39 +659,54 @@ public class Teste2 {
                     playlist.add(m);
                     JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
                 }
+                save_musicas(playlist);
                 
-                break;
+                break;          //break do caso 4
                 
-            case 5:         //caso para remover uma musica ao vetor playlist
-                
-                String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
-                String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
+            case 5:         //caso para remover uma musica ao vetor playlist        MENU PRINCIPAL
                 
                 if(playlist.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Não há músicas a remover.");
                     break;
                 }
                 
+                String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
+                String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
+                
                 for(Musica mus: playlist) {
                     if(tit.equals(mus.getTitulo()) && aut.equals(mus.getAutor())) {
                         playlist.remove(mus);
-                        JOptionPane.showMessageDialog(null, "Musica removida "+"com sucesso");
+                        JOptionPane.showMessageDialog(null, "Musica removida com sucesso.");
                         break;
                     }
                     else{
-                        JOptionPane.showMessageDialog(null,"Musica nao encontrada nos registos");
+                        JOptionPane.showMessageDialog(null,"Musica nao encontrada nos registos.");
                         break;
                     }
                 }
+                save_musicas(playlist);
+                break;
+                    
+            case 6:         //caso para listar todos os users
+                
+                if(users.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Não existem utilizadores.");
+                    break;
+                }
+                String s ="";
+                for(int i = 0;i< users.size();i++){
+                    String nic = users.get(i).getNick()+"\n";
+                    s += nic;
+                }
+                
+                JOptionPane.showMessageDialog(null,"Lista de Users\n\n"+s+"\n");
                 
                 break;
                 
-            case 6:         //caso para sair da aplicação
+            case 7:         //caso para sair da aplicação               MENU PRINCIPAL
                 
                 an = JOptionPane.showConfirmDialog(null, "Tem a certeza que pretende sair ? ");
                 if(an < 0){
-                    save(users);
-                    save_musicas(playlist);
                     System.exit(0);
                 }
                 

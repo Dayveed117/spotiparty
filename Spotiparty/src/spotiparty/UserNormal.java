@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
  */
 public class UserNormal extends User implements Serializable{
     
-    private static  int ID = 1;
-    private int Idade;
+    private static int ultimo = 1;
+    private int Idade, ID;
     private String Nickname;
     private String Password;
-    private ArrayList<UserNormal> amigos = new ArrayList<UserNormal>();
+    private ArrayList<UserNormal> amigos = new ArrayList<>();
    
     public UserNormal(String n, String nick, String PW, int idade) {
         super(n);
@@ -27,8 +27,8 @@ public class UserNormal extends User implements Serializable{
         Nickname = nick;
         Password = PW;
         this.Idade = idade;
-        this.ID = ID;
-        ID++;
+        ID = ultimo;
+        ultimo++;
     }
     
     public UserNormal(UserNormal u){
@@ -37,15 +37,15 @@ public class UserNormal extends User implements Serializable{
         this.Nickname = u.getNick();
         this.Password = u.getPW();
         this.amigos = u.getAmigos();
-        this.ID = ID;
-        ID++;
+        ID = ultimo;
+        ultimo++;
     }
     
     public UserNormal()
     {
         super();
-        this.ID = ID;
-        ID++;
+        ID = ultimo;
+        ultimo++;
         this.Idade = 0;
         this.Nickname = "";
         this.Password = "";
