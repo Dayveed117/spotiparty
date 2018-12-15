@@ -728,7 +728,7 @@ public class Teste {
         }
         
         
-        }while(an > 0);     // repeticao do menu principal enquanto nao der exit
+        }while(an > 0 || an == -2);     // repeticao do menu principal enquanto nao der exit
         
         
     }//fim do main
