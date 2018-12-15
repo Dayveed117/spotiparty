@@ -409,7 +409,7 @@ public class Teste {
         
         ArrayList<Musica> playlist ;
          try{
-            playlist = new ArrayList<>(20);
+            playlist= new ArrayList<>(20);
             playlist = loadmusicas();
             
         }
@@ -423,8 +423,8 @@ public class Teste {
         
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<>();
-        suggested.add("Sugira uma musica :");
-        
+        suggested.add("Musicas Sugeridas : ");
+        int j ; // usada para circular musicas
         
         boolean guest = false;
         int n_sala = 0;
@@ -482,7 +482,6 @@ public class Teste {
                               }
                               
                               try{
-                              current_sala.getMembros().add(current_user);
                               entrar_sala(current_sala,current_sala.getMensagens(),current_sala.getMembros(),current_sala.getMusicas(),users,suggested);
                               }
                               catch(Exception e){
@@ -618,6 +617,7 @@ public class Teste {
                                }
        
                     }//fim do switch do menu2
+                    JOptionPane.showMessageDialog(null,"Nenhum utilizador registado.");
                 }         
 
                 break;
@@ -665,18 +665,9 @@ public class Teste {
                 String autor = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
                 String album = JOptionPane.showInputDialog(null,"De que album é essa música?");
                 String genero = JOptionPane.showInputDialog(null,"De que género é essa música?");
-
-                double dur = 0;
-                while(true){
-                try{
                 String duracao = JOptionPane.showInputDialog(null,"Que duração vai ter a musica?");
-                dur = Double.parseDouble(duracao);
-                break;
-                }
-                catch(Exception e){
-                    JOptionPane.showMessageDialog(null, "Insira uma duração valida");
-                }
-                }
+                double dur = Double.parseDouble(duracao);
+                
                 Musica m = new Musica(dur, titulo, autor, album, genero);
                 
                 if(playlist.isEmpty() == false) {
@@ -699,6 +690,7 @@ public class Teste {
                 else {
                     playlist.add(m);
                     JOptionPane.showMessageDialog(null, "Musica adicionada com sucesso");
+                    System.out.println(playlist.isEmpty());
                 }
                 
                 break;
@@ -706,6 +698,7 @@ public class Teste {
                 
             case 5:         //caso para remover uma musica ao vetor playlist
                 
+                System.out.println(playlist.isEmpty());
                 String tit = JOptionPane.showInputDialog(null,"Qual vai ser o título da música?");
                 String aut = JOptionPane.showInputDialog(null,"Qual o artista dessa música?");
                 
