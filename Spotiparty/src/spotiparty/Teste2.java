@@ -393,7 +393,7 @@ public class Teste2 {
         
         UserNormal current_user = new UserNormal();
         ArrayList<String>suggested = new ArrayList<>();
-        suggested.add("Sugira uma música : ");
+        suggested.add("Musicas Sugeridas : ");
         
         boolean guest = false;
         int idade, an = -2;
@@ -510,6 +510,8 @@ public class Teste2 {
                    }
                    
                    JOptionPane.showMessageDialog(null, "Lista de músicas:\n\n"+s+"\n");
+                   
+                    mLI1 = menu_loggedIn(current_user, guest);
                    break;
                    
                case 6:         //caso para sair da aplicação                MENU SECUNDARIO         1
