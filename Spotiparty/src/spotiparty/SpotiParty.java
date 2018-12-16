@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  *
  * @author a40284
  */
-public class Teste2 {
+public class SpotiParty {
 
     public static void save(ArrayList<UserNormal> users) throws FileNotFoundException, IOException{
         
